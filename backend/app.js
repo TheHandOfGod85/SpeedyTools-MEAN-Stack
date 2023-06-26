@@ -1,9 +1,15 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const exampleRouter = require('./routes/exampleRoute')
 
 const app = express()
+app.use(
+  cors({
+    origin: 'http://localhost:4200',
+  })
+)
 
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === 'development') {
