@@ -1,0 +1,302 @@
+[
+  {
+    "name": "Scraper",
+    "description": "database",
+    "quantity": 5,
+    "serialNumber": "WBANW535X9C882232",
+    "manufacturer": "Ford",
+    "installationDate": "2021-04-13 10:53:32",
+    "location": "Marketing",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Dragline",
+    "description": "Upgradable",
+    "quantity": 5,
+    "serialNumber": "1N6AD0CW6FN565323",
+    "manufacturer": "Cadillac",
+    "installationDate": "2022-12-01 08:17:16",
+    "location": "Sales",
+    "powerRequirement": 2
+  },
+  {
+    "name": "Bulldozer",
+    "description": "heuristic",
+    "quantity": 2,
+    "serialNumber": "JN1AJ0HP5AM021846",
+    "manufacturer": "Jeep",
+    "installationDate": "2019-02-16 08:13:19",
+    "location": "Sales",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Dump Truck",
+    "description": "implementation",
+    "quantity": 4,
+    "serialNumber": "JTEBU4BFXAK366958",
+    "manufacturer": "Mitsubishi",
+    "installationDate": "2022-12-14 20:19:04",
+    "location": "Sales",
+    "powerRequirement": 4
+  },
+  {
+    "name": "Dump Truck",
+    "description": "Decentralized",
+    "quantity": 4,
+    "serialNumber": "1J4PN2GK8BW138947",
+    "manufacturer": "Mercedes-Benz",
+    "installationDate": "2018-12-20 13:44:45",
+    "location": "Legal",
+    "powerRequirement": 1
+  },
+  {
+    "name": "Dump Truck",
+    "description": "Digitized",
+    "quantity": 3,
+    "serialNumber": "JM1NC2LF0F0321652",
+    "manufacturer": "Ford",
+    "installationDate": "2021-06-10 15:39:54",
+    "location": "Engineering",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Excavator",
+    "description": "initiative",
+    "quantity": 5,
+    "serialNumber": "1C3CDZCB5CN110511",
+    "manufacturer": "Lamborghini",
+    "installationDate": "2023-02-10 13:54:45",
+    "location": "Legal",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Grader",
+    "description": "Upgradable",
+    "quantity": 5,
+    "serialNumber": "JN1AZ4EHXCM776572",
+    "manufacturer": "Jeep",
+    "installationDate": "2022-09-06 11:53:18",
+    "location": "Human Resources",
+    "powerRequirement": 4
+  },
+  {
+    "name": "Skid-Steer",
+    "description": "moderator",
+    "quantity": 5,
+    "serialNumber": "KNAFU6A24C5246023",
+    "manufacturer": "Infiniti",
+    "installationDate": "2021-11-05 17:47:26",
+    "location": "Support",
+    "powerRequirement": 3
+  },
+  {
+    "name": "Skid-Steer",
+    "description": "clear-thinking",
+    "quantity": 3,
+    "serialNumber": "4A31K5DF9CE560212",
+    "manufacturer": "Chrysler",
+    "installationDate": "2023-04-29 10:41:29",
+    "location": "Accounting",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Dragline",
+    "description": "web-enabled",
+    "quantity": 3,
+    "serialNumber": "1FTFW1E8XAK795347",
+    "manufacturer": "Jaguar",
+    "installationDate": "2018-11-14 08:56:22",
+    "location": "Accounting",
+    "powerRequirement": 3
+  },
+  {
+    "name": "Grader",
+    "description": "open system",
+    "quantity": 4,
+    "serialNumber": "1LNHL9DR7AG325093",
+    "manufacturer": "Chevrolet",
+    "installationDate": "2023-05-31 05:39:02",
+    "location": "Human Resources",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Skid-Steer",
+    "description": "tangible",
+    "quantity": 3,
+    "serialNumber": "WAUHF98P28A588221",
+    "manufacturer": "Audi",
+    "installationDate": "2020-10-13 09:34:52",
+    "location": "Services",
+    "powerRequirement": 2
+  },
+  {
+    "name": "Excavator",
+    "description": "Secured",
+    "quantity": 2,
+    "serialNumber": "WAUGF98K69A226331",
+    "manufacturer": "Pontiac",
+    "installationDate": "2020-04-21 15:28:50",
+    "location": "Research and Development",
+    "powerRequirement": 2
+  },
+  {
+    "name": "Scraper",
+    "description": "even-keeled",
+    "quantity": 1,
+    "serialNumber": "5N1BA0NE7FN029478",
+    "manufacturer": "Buick",
+    "installationDate": "2021-08-07 12:28:53",
+    "location": "Engineering",
+    "powerRequirement": 2
+  },
+  {
+    "name": "Skid-Steer",
+    "description": "Up-sized",
+    "quantity": 2,
+    "serialNumber": "JM1NC2LFXE0111851",
+    "manufacturer": "Jeep",
+    "installationDate": "2023-01-02 05:20:08",
+    "location": "Accounting",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Backhoe",
+    "description": "access",
+    "quantity": 2,
+    "serialNumber": "JN1CV6EK8FM517398",
+    "manufacturer": "Ford",
+    "installationDate": "2020-09-12 09:05:01",
+    "location": "Business Development",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Skid-Steer",
+    "description": "well-modulated",
+    "quantity": 3,
+    "serialNumber": "5FRYD4H69GB597277",
+    "manufacturer": "Acura",
+    "installationDate": "2021-09-24 16:29:39",
+    "location": "Research and Development",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Scraper",
+    "description": "empowering",
+    "quantity": 2,
+    "serialNumber": "WBABS33443P511013",
+    "manufacturer": "Chevrolet",
+    "installationDate": "2022-10-23 08:52:16",
+    "location": "Marketing",
+    "powerRequirement": 1
+  },
+  {
+    "name": "Trencher",
+    "description": "emulation",
+    "quantity": 4,
+    "serialNumber": "2C3CDYCJ7EH431964",
+    "manufacturer": "GMC",
+    "installationDate": "2021-04-09 19:40:59",
+    "location": "Research and Development",
+    "powerRequirement": 3
+  },
+  {
+    "name": "Compactor",
+    "description": "time-frame",
+    "quantity": 3,
+    "serialNumber": "1N6AA0CA9EN486353",
+    "manufacturer": "Plymouth",
+    "installationDate": "2022-12-30 07:57:34",
+    "location": "Product Management",
+    "powerRequirement": 4
+  },
+  {
+    "name": "Bulldozer",
+    "description": "Expanded",
+    "quantity": 3,
+    "serialNumber": "5N1AA0NC1CN332925",
+    "manufacturer": "Mercury",
+    "installationDate": "2022-01-07 08:48:27",
+    "location": "Services",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Backhoe",
+    "description": "Self-enabling",
+    "quantity": 2,
+    "serialNumber": "5GTMNGEE6A8709575",
+    "manufacturer": "Audi",
+    "installationDate": "2021-06-13 03:34:48",
+    "location": "Engineering",
+    "powerRequirement": 2
+  },
+  {
+    "name": "Bulldozer",
+    "description": "groupware",
+    "quantity": 5,
+    "serialNumber": "WAUSGCFC6CN616149",
+    "manufacturer": "Mercedes-Benz",
+    "installationDate": "2022-09-14 10:14:29",
+    "location": "Product Management",
+    "powerRequirement": 4
+  },
+  {
+    "name": "Excavator",
+    "description": "process improvement",
+    "quantity": 5,
+    "serialNumber": "WBS3R9C56FK595201",
+    "manufacturer": "Lincoln",
+    "installationDate": "2018-11-25 08:01:35",
+    "location": "Human Resources",
+    "powerRequirement": 1
+  },
+  {
+    "name": "Excavator",
+    "description": "Advanced",
+    "quantity": 5,
+    "serialNumber": "SCBGT3ZA8DC592886",
+    "manufacturer": "Audi",
+    "installationDate": "2021-01-31 21:30:21",
+    "location": "Training",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Dump Truck",
+    "description": "Diverse",
+    "quantity": 4,
+    "serialNumber": "WBSBR93415P420455",
+    "manufacturer": "Maserati",
+    "installationDate": "2019-06-02 16:25:43",
+    "location": "Business Development",
+    "powerRequirement": 3
+  },
+  {
+    "name": "Excavator",
+    "description": "Fundamental",
+    "quantity": 2,
+    "serialNumber": "YV1902AH4B1693587",
+    "manufacturer": "Pontiac",
+    "installationDate": "2022-04-15 04:35:48",
+    "location": "Human Resources",
+    "powerRequirement": 5
+  },
+  {
+    "name": "Dump Truck",
+    "description": "parallelism",
+    "quantity": 1,
+    "serialNumber": "2C3CDXJG8CH186817",
+    "manufacturer": "Mitsubishi",
+    "installationDate": "2023-04-25 00:16:59",
+    "location": "Marketing",
+    "powerRequirement": 1
+  },
+  {
+    "name": "Skid-Steer",
+    "description": "Operative",
+    "quantity": 4,
+    "serialNumber": "JH4DC53843C941945",
+    "manufacturer": "Audi",
+    "installationDate": "2021-09-13 21:58:09",
+    "location": "Business Development",
+    "powerRequirement": 2
+  }
+]

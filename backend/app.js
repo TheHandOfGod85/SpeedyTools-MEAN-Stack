@@ -2,7 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 
-const exampleRouter = require('./routes/exampleRoute')
+const equipmentRouter = require('./routes/equipmentRoute')
 
 const app = express()
 app.use(
@@ -20,6 +20,6 @@ app.use(express.json())
 app.use(express.static(`${__dirname}/public`))
 
 // 3) ROUTES
-app.use('/api/v1/example', exampleRouter)
+app.use('/api/equipments', equipmentRouter)
 
 module.exports = app
