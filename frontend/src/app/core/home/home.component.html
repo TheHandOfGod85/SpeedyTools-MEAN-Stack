@@ -1,3 +1,19 @@
-<div class="d-flex justify-content-center">
-  <p class="fw-bold">Hello world</p>
+<div class="list-group container-fluid">
+  <div
+    href="#"
+    class="list-group-item my-1"
+    style="cursor: pointer"
+    *ngFor="let equipment of equipments"
+  >
+    <div class="d-flex w-100 justify-content-between">
+      <h3 class="fw-bold text-primary-emphasis mb-1">{{ equipment.name }}</h3>
+      <small>{{ "Installed: " + equipment.installationDate }}</small>
+    </div>
+    <p class="mb-1">{{ equipment.description }}</p>
+
+    <div class="d-flex w-100 justify-content-between">
+      <small>{{ "Power Requirement: " + equipment.powerRequirement }}</small>
+      <button class="btn btn-primary btn-sm">Delete</button>
+    </div>
+  </div>
 </div>
