@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const equipmentSchema = new mongoose.Schema({
   name: {
@@ -16,18 +17,20 @@ const equipmentSchema = new mongoose.Schema({
   },
   manufacturer: {
     type: String,
-    required: true,
+    required: [true, 'An equipment must have a manufacturer'],
   },
   installationDate: Date,
   powerRequirement: {
     type: Number,
-    required: true,
+    required: [true, 'An equipment must have a power requirement'],
   },
   location: {
     type: String,
-    required: true,
+    required: [true, 'An equipment must have a location'],
   },
 })
+
+equipmentSchema.plugin(uniqueValidator)
 
 const Equipment = mongoose.model('Equipment', equipmentSchema)
 
