@@ -1,4 +1,12 @@
-<div class="list-group container-fluid">
+<div class="d-flex justify-content-center" *ngIf="!isFetching">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="list-group mx-4" *ngIf="isFetching">
+  <div class="m-3">
+    <button class="btn btn-primary">Add</button>
+  </div>
   <div
     href="#"
     class="list-group-item my-1"
@@ -13,7 +21,10 @@
 
     <div class="d-flex w-100 justify-content-between">
       <small>{{ "Power Requirement: " + equipment.powerRequirement }}</small>
-      <button class="btn btn-primary btn-sm">Delete</button>
+      <div>
+        <button class="btn btn-primary btn-sm me-1">Edit</button>
+        <button class="btn btn-danger btn-sm">Delete</button>
+      </div>
     </div>
   </div>
 </div>
