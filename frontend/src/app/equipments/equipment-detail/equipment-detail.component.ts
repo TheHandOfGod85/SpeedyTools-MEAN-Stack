@@ -9,7 +9,17 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./equipment-detail.component.css'],
 })
 export class EquipmentDetailComponent implements OnInit {
-  equipment: Equipment = null;
+  equipment: Equipment = {
+    name: '',
+    description: '',
+    installationDate: null,
+    location: '',
+    manufacturer: '',
+    powerRequirement: null,
+    quantity: 0,
+    serialNumber: '',
+  };
+
   id: string;
 
   constructor(

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EquipmentsComponent } from './equipments.component';
 import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.component';
 import { EquipmentsListComponent } from './equipments-list/equipments-list.component';
+import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,9 @@ const routes: Routes = [
     component: EquipmentsComponent,
     children: [
       { path: '', component: EquipmentsListComponent },
-      { path: ':id', component: EquipmentDetailComponent }
+      { path: 'add', component: AddEquipmentComponent },
+      { path: ':id', component: EquipmentDetailComponent },
+      { path: ':id/edit', component: AddEquipmentComponent },
     ],
   },
 ];

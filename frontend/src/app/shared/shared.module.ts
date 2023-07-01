@@ -6,6 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [ConfirmationComponent],
   imports: [
@@ -15,6 +20,11 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatSnackBarModule,
     MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ConfirmationComponent,
@@ -24,6 +34,11 @@ import { MatCardModule } from '@angular/material/card';
     MatSnackBarModule,
     CommonModule,
     MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
   ],
 })
 export class SharedModule {}
