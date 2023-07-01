@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { GlobalErrorHandlerProvider } from './core/global-error-handler';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,7 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [GlobalErrorHandlerProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
