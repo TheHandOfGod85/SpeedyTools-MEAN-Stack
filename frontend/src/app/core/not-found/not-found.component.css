@@ -1,0 +1,97 @@
+.mainbox {
+  background-color: #95c2de;
+  margin: auto;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.err {
+  color: #ffffff;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 11rem;
+}
+
+.far {
+  font-size: 8.5rem;
+  color: #ffffff;
+}
+
+.err2 {
+  color: #ffffff;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 11rem;
+}
+
+.msg {
+  text-align: center;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.6rem;
+  width: 75%;
+  margin-top: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+
+@media screen and (max-width: 768px) {
+  .err {
+    font-size: 7rem;
+    left: 15%;
+  }
+
+  .far {
+    font-size: 5rem;
+    left: 35%;
+    top: 12%;
+  }
+
+  .err2 {
+    font-size: 7rem;
+    left: 55%;
+  }
+
+  .msg {
+    font-size: 1.2rem;
+    left: 10%;
+    top: 38%;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .err {
+    font-size: 4rem;
+    left: 10%;
+    top: 5%;
+  }
+
+  .far {
+    font-size: 3rem;
+    left: 30%;
+    top: 8%;
+  }
+
+  .err2 {
+    font-size: 4rem;
+    left: 50%;
+    top: 5%;
+  }
+
+  .msg {
+    font-size: 1rem;
+    left: 5%;
+    top: 35%;
+    width: 90%;
+  }
+}
