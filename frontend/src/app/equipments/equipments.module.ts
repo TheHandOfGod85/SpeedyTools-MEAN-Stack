@@ -6,6 +6,7 @@ import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.co
 import { EquipmentRoutingModule } from './equipments-routing.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EquipmentsListComponent } from './equipments-list/equipments-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EquipmentsListComponent } from './equipments-list/equipments-list.compo
     CommonModule,
     EquipmentRoutingModule,
     MatSnackBarModule,
+    SharedModule
   ],
 })
 export class EquipmentsModule {}

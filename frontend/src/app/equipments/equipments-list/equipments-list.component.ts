@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Equipment } from '../equipment.model';
 import { EquipmentService } from '../equipments.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmationComponent } from 'src/app/shared/confirmation/confirmation.component';
+import { DialogService } from 'src/app/shared/dialog.service';
 
 @Component({
   selector: 'app-equipments-list',
@@ -14,20 +17,33 @@ export class EquipmentsListComponent {
 
   constructor(
     private equipmentService: EquipmentService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
     this.onLoadingEquipments();
   }
 
-  onDeleteEquipment(id: string) {
-    this.equipmentService.delete(id).subscribe(() => {
-      this.onLoadingEquipments();
-      this._snackBar.open('Deleted', 'Close', {
-        horizontalPosition: 'center',
+  onDeleteEquipment(id: string): void {
+    this.dialogService
+      .confirmDialog({
+        title: 'DELETE EQUIPMENT',
+        message: 'Are you sure you want to delete?',
+        confirmText: 'No',
+        cancelText: 'Yes',
+      })
+      .subscribe((confirm) => {
+        if (confirm) {
+          this.equipmentService.delete(id).subscribe(() => {
+            this.onLoadingEquipments();
+            this._snackBar.open('Deleted', 'Close', {
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            });
+          });
+        }
       });
-    });
   }
 
   onLoadingEquipments() {
