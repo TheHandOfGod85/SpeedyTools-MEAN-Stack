@@ -1,3 +1,25 @@
-<div class="d-flex flex-column align-items-center justify-content-center h-75">
-  <p>{{ equipment.name }}</p>
+<div class="mt-5 h-50">
+  <mat-card class="h-100 mx-2 bg-light">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title class="text-nowrap">{{
+          equipment.name
+        }}</mat-card-title>
+        <mat-card-subtitle>Small</mat-card-subtitle>
+        <img
+          mat-card-md-image
+          src="./../../../assets/images/placeholder-image.png"
+          alt="none"
+        />
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      {{ equipment.description }}
+    </mat-card-content>
+  </mat-card>
+  <div class="mt-1 text-center">
+    <a mat-raised-button color="primary" type="button" routerLink="/equipments"
+      >Go back</a
+    >
+  </div>
 </div>
