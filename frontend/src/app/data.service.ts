@@ -14,8 +14,8 @@ export abstract class DataService {
   create<T>(resource: T): Observable<T> {
     return this.http.post<T>(this.url, resource);
   }
-  update<T>(resource: T, id: string): Observable<T> {
-    return this.http.put<T>(this.url + id, resource);
+  update<T>(id: string, resource: T): Observable<T> {
+    return this.http.patch<T>(this.url + id, resource);
   }
   delete<T>(id: string): Observable<T> {
     return this.http.delete<T>(this.url + id);

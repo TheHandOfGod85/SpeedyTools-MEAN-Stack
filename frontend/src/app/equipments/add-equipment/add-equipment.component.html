@@ -156,7 +156,13 @@
               Please enter a location
             </p>
             <div class="text-end mt-5">
-              <button class="btn btn-secondary" type="submit">Submit</button>
+              <button
+                class="btn btn-secondary"
+                type="submit"
+                [disabled]="!addEquipmentForm.valid"
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
 import { Equipment } from './../equipment.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EquipmentService } from '../equipments.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-equipment',
@@ -25,7 +26,9 @@ export class AddEquipmentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private equipmentService: EquipmentService
+    private equipmentService: EquipmentService,
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,9 +42,8 @@ export class AddEquipmentComponent implements OnInit {
           this.equipment = result.data.equipment;
           this.initForm();
         });
-    } else {
-      this.initForm();
     }
+    this.initForm();
   }
 
   private initForm() {
@@ -67,6 +69,31 @@ export class AddEquipmentComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.addEquipmentForm);
+    if (this.id && this.addEquipmentForm.valid) {
+      this.equipmentService
+        .update<{ status: string }>(this.id, this.addEquipmentForm.value)
+        .subscribe((result) => {
+          if (result.status === 'success') {
+            this._snackBar.open('Updated', 'Close', {
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            });
+          }
+        });
+    } else {
+      if (this.addEquipmentForm.valid) {
+        this.equipmentService
+          .create<{ status: string }>(this.addEquipmentForm.value)
+          .subscribe((result) => {
+            if (result.status === 'success') {
+              this._snackBar.open('Created', 'Close', {
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom',
+              });
+              this.router.navigate(['equipments']);
+            }
+          });
+      }
+    }
   }
 }
