@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
+const crypto = require('crypto')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -17,6 +18,11 @@ const userSchema = new mongoose.Schema({
     },
     photo: {
         type: String
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
     },
     password: {
         type: String,
@@ -35,7 +41,9 @@ const userSchema = new mongoose.Schema({
             message: 'Password are not the same'
         }
     },
-    passwordChangedAt: Date
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date
 })
 // Encrypt the password with mongoose middleware
 userSchema.pre('save', async function (next) {
@@ -58,7 +66,14 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     }
     return false
 }
-
+//instance method create password reset token
+userSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(32).toString('hex')
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex')
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000
+    console.log({ resetToken }, this.passwordResetToken)
+    return resetToken
+}
 userSchema.plugin(uniqueValidator)
 const User = mongoose.model('User', userSchema)
 module.exports = User
