@@ -1,11 +1,12 @@
 const express = require('express')
 const equipmentController = require('../controllers/equipmentController')
+const authController = require('./../controllers/authController')
 
 const router = express.Router()
 
 router
   .route('/')
-  .get(equipmentController.getAllEquipments)
+  .get(authController.protect, equipmentController.getAllEquipments)
   .post(equipmentController.createEquipment)
 
 router
