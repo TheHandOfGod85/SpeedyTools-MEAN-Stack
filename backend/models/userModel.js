@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 const validator = require('validator')
+const bcrypt = require('bcryptjs')
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -25,7 +26,22 @@ const userSchema = new mongoose.Schema({
   passwordConfirm: {
     type: String,
     required: [true, 'Please confirm your password'],
+    // this only works on create or save
+    validate: {
+      validator: function (element) {
+        return element === this.password //custom validation to make sure password and confirm matches
+      },
+      message: 'Password are not the same',
+    },
   },
+})
+// Encrypt the password with mongoose middleware
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next()
+
+  this.password = await bcrypt.hash(this.password, 12)
+  this.passwordConfirm = undefined
+  next()
 })
 
 userSchema.plugin(uniqueValidator)
