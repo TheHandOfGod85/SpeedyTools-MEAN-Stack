@@ -6,6 +6,7 @@ const globalErrorHandler = require('./controllers/errorController')
 const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize')
 const xss = require('xss-clean')
+const hpp = require('hpp')
 
 const equipmentRouter = require('./routes/equipmentRoute')
 const usersRouter = require('./routes/userRoute')
@@ -40,7 +41,13 @@ app.use(express.json({ limit: '10kb' }))
 // data sanitization against NoSQL query injection
 app.use(mongoSanitize())
 // data sanitization against XSS attacks
-app.use(xss())
+app.use(xss({}))
+//prevent parameter pollution
+app.use(
+    hpp({
+        whitelist: ['powerRequirement']
+    })
+)
 //serving  static files
 app.use(express.static(`${__dirname}/public`))
 
