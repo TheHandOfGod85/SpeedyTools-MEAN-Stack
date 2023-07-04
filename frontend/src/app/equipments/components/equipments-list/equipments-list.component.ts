@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Equipment } from '../../models/equipment.model';
 import { EquipmentService } from '../../services/equipments.service';
-import { DialogService } from 'src/app/shared/dialog.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { Store } from '@ngrx/store';
+import { State } from '../../state/equipment.reducer';
+import * as EquipmentActions from './../../state/actions/load-equipments.action';
+import { getEquipments } from '../../state/selectors/equipment.selector';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-equipments-list',
@@ -10,13 +15,14 @@ import { DialogService } from 'src/app/shared/dialog.service';
   styleUrls: ['./equipments-list.component.css'],
 })
 export class EquipmentsListComponent {
-  equipments: Equipment[];
+  equipments$: Observable<Equipment[]>;
   isFetching: boolean = false;
 
   constructor(
     private equipmentService: EquipmentService,
     private _snackBar: MatSnackBar,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private store: Store<State>
   ) {}
 
   ngOnInit(): void {
@@ -45,16 +51,7 @@ export class EquipmentsListComponent {
   }
 
   onLoadingEquipments() {
-    this.isFetching = false;
-    this.equipmentService
-      .getAll<{
-        status: string;
-        result: number;
-        data: { equipments: Equipment[] };
-      }>()
-      .subscribe((result) => {
-        this.isFetching = true;
-        this.equipments = result.data.equipments;
-      });
+    this.store.dispatch(EquipmentActions.loadEquipments());
+    this.equipments$ = this.store.select(getEquipments);
   }
 }

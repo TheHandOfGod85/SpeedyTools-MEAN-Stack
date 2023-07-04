@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { GlobalErrorHandlerProvider } from './core/global-error-handler';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,12 +21,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     HttpClientModule,
     CoreModule,
     SharedModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       name: 'SpeedyTools',
       maxAge: 25,
       logOnly: !isDevMode(),
     }),
+    EffectsModule.forRoot([]),
   ],
   providers: [GlobalErrorHandlerProvider],
   bootstrap: [AppComponent],

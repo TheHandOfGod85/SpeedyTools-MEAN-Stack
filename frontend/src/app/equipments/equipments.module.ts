@@ -1,3 +1,4 @@
+import { equipmentReducer } from './state/equipment.reducer';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { EquipmentsComponent } from './equipments.component';
@@ -7,6 +8,8 @@ import { EquipmentsListComponent } from './components/equipments-list/equipments
 import { SharedModule } from '../shared/shared.module';
 import { AddEquipmentComponent } from './components/add-equipment/add-equipment.component';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { EquipmentEffects } from './state/effects/equipment.effects';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { StoreModule } from '@ngrx/store';
     RouterModule,
     EquipmentRoutingModule,
     SharedModule,
-    StoreModule.forFeature('equipments', {}),
+    StoreModule.forFeature('equipments', equipmentReducer),
+    EffectsModule.forFeature([EquipmentEffects]),
   ],
 })
 export class EquipmentsModule {}
