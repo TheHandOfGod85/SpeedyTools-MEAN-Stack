@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { GlobalErrorHandlerProvider } from './core/global-error-handler';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +20,12 @@ import { GlobalErrorHandlerProvider } from './core/global-error-handler';
     HttpClientModule,
     CoreModule,
     SharedModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({
+      name: 'SpeedyTools',
+      maxAge: 25,
+      logOnly: !isDevMode(),
+    }),
   ],
   providers: [GlobalErrorHandlerProvider],
   bootstrap: [AppComponent],

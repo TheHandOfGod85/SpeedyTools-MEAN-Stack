@@ -6,6 +6,7 @@ import { EquipmentRoutingModule } from './equipments-routing.module';
 import { EquipmentsListComponent } from './equipments-list/equipments-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,11 @@ import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
     EquipmentsListComponent,
     AddEquipmentComponent,
   ],
-  imports: [RouterModule, EquipmentRoutingModule, SharedModule],
+  imports: [
+    RouterModule,
+    EquipmentRoutingModule,
+    SharedModule,
+    StoreModule.forFeature('equipments', {}),
+  ],
 })
 export class EquipmentsModule {}
