@@ -1,8 +1,8 @@
-import { Equipment } from './../equipment.model';
+import { Equipment } from '../../models/equipment.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { EquipmentService } from '../equipments.service';
+import { EquipmentService } from '../../services/equipments.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

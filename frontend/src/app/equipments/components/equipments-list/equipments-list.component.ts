@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Equipment } from '../equipment.model';
-import { EquipmentService } from '../equipments.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ConfirmationComponent } from 'src/app/shared/confirmation/confirmation.component';
+import { Equipment } from '../../models/equipment.model';
+import { EquipmentService } from '../../services/equipments.service';
 import { DialogService } from 'src/app/shared/dialog.service';
 
 @Component({
