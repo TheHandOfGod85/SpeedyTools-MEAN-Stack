@@ -1,5 +1,10 @@
+import * as AppState from './../../state/app.state';
+import { EquipmenState } from './equipment.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { EquipmenState } from '../equipment.reducer';
+
+export interface State extends AppState.State {
+  equipments: EquipmenState;
+}
 
 const getEquipmentFeatureState =
   createFeatureSelector<EquipmenState>('equipments');

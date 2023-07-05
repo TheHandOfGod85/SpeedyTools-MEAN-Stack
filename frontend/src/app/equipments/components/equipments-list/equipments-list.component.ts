@@ -4,10 +4,9 @@ import { Equipment } from '../../models/equipment.model';
 import { EquipmentService } from '../../services/equipments.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { Store } from '@ngrx/store';
-import { State } from '../../state/equipment.reducer';
-import * as EquipmentActions from './../../state/actions/load-equipments.action';
-import { getEquipments } from '../../state/selectors/equipment.selector';
+import { getEquipments, State } from '../../state';
 import { Observable } from 'rxjs';
+import { EquipmentPageActions } from '../../state/actions';
 
 @Component({
   selector: 'app-equipments-list',
@@ -51,7 +50,7 @@ export class EquipmentsListComponent {
   }
 
   onLoadingEquipments() {
-    this.store.dispatch(EquipmentActions.loadEquipments());
+    this.store.dispatch(EquipmentPageActions.loadEquipments());
     this.equipments$ = this.store.select(getEquipments);
   }
 }

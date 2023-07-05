@@ -1,11 +1,6 @@
 import { Equipment } from '../models/equipment.model';
-import * as AppState from './../../state/app.state';
-import * as EquipmentActions from './actions/load-equipments.action';
 import { createReducer, on } from '@ngrx/store';
-
-export interface State extends AppState.State {
-  equipments: EquipmenState;
-}
+import { EquipmentApiActions } from './actions';
 
 export interface EquipmenState {
   equipments: Equipment[];
@@ -19,18 +14,24 @@ const initialState: EquipmenState = {
 
 export const equipmentReducer = createReducer<EquipmenState>(
   initialState,
-  on(EquipmentActions.loadEquipmentsSuccess, (state, action): EquipmenState => {
-    return {
-      ...state,
-      equipments: action.equipments,
-      error: '',
-    };
-  }),
-  on(EquipmentActions.loadEquipmentsFailure, (state, action): EquipmenState => {
-    return {
-      ...state,
-      equipments: [],
-      error: action.error,
-    };
-  })
+  on(
+    EquipmentApiActions.loadEquipmentsSuccess,
+    (state, action): EquipmenState => {
+      return {
+        ...state,
+        equipments: action.equipments,
+        error: '',
+      };
+    }
+  ),
+  on(
+    EquipmentApiActions.loadEquipmentsFailure,
+    (state, action): EquipmenState => {
+      return {
+        ...state,
+        equipments: [],
+        error: action.error,
+      };
+    }
+  )
 );

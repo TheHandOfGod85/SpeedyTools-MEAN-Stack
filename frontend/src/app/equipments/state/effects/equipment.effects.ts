@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EquipmentService } from '../../services/equipments.service';
-import * as EquipmentActions from './../actions/load-equipments.action';
 import { map, mergeMap } from 'rxjs';
 import { Equipment } from '../../models/equipment.model';
+import { EquipmentApiActions, EquipmentPageActions } from '../actions';
 
 @Injectable()
 export class EquipmentEffects {
@@ -14,13 +14,13 @@ export class EquipmentEffects {
 
   loadEquipments$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(EquipmentActions.loadEquipments),
+      ofType(EquipmentPageActions.loadEquipments),
       mergeMap(() =>
         this.equipmentService
           .getAll<{ status: string; data: { equipments: Equipment[] } }>()
           .pipe(
             map((result) =>
-              EquipmentActions.loadEquipmentsSuccess({
+              EquipmentApiActions.loadEquipmentsSuccess({
                 equipments: result.data.equipments,
               })
             )
