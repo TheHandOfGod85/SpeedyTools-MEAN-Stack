@@ -9,7 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AddEquipmentComponent } from './components/add-equipment/add-equipment.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { EquipmentEffects } from './state/effects/equipment.effects';
+import { EquipmentEffects } from './state/equipment.effects';
 
 @NgModule({
   declarations: [

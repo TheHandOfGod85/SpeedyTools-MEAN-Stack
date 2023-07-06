@@ -1,9 +1,9 @@
-<div class="mt-5 h-50">
+<div class="mt-5 h-50" *ngIf="equipment$ | async as equipment">
   <mat-card class="h-100 mx-2 bg-light">
     <mat-card-header>
       <mat-card-title-group>
         <mat-card-title class="text-nowrap">{{
-          equipment.name 
+          equipment.name
         }}</mat-card-title>
         <mat-card-subtitle>Small</mat-card-subtitle>
         <img

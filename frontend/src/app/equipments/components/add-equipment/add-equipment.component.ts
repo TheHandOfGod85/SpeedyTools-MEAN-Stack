@@ -1,98 +1,116 @@
 import { Equipment } from '../../models/equipment.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { EquipmentService } from '../../services/equipments.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import { State, getIsLoading } from '../../state';
+import { EquipmentPageActions } from '../../state/actions';
+import { Observable, tap } from 'rxjs';
+import { getCurrentEquipment } from '../../state';
 
 @Component({
   selector: 'app-add-equipment',
   templateUrl: './add-equipment.component.html',
   styleUrls: ['./add-equipment.component.css'],
 })
-export class AddEquipmentComponent implements OnInit {
+export class AddEquipmentComponent implements OnInit, OnDestroy {
   addEquipmentForm: FormGroup;
-  id: string;
-  equipment: Equipment = {
-    name: '',
-    description: '',
-    installationDate: null,
-    location: '',
-    manufacturer: '',
-    powerRequirement: null,
-    quantity: 0,
-    serialNumber: '',
-  };
+  equipment$: Observable<Equipment | null>;
+  isLoading$: Observable<boolean>;
+  title: string = '';
+  equipmentId: string;
 
   constructor(
     private route: ActivatedRoute,
-    private equipmentService: EquipmentService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private store: Store<State>
   ) {}
+  ngOnDestroy(): void {
+    this.store.dispatch(
+      EquipmentPageActions.setCurrentEquipmentId({ id: null })
+    );
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-    });
-    if (this.id) {
-      this.equipmentService
-        .get<{ status: string; data: { equipment: Equipment } }>(this.id)
-        .subscribe((result) => {
-          this.equipment = result.data.equipment;
-          this.initForm();
-        });
-    }
     this.initForm();
+    this.route.params.subscribe((params: Params) => {
+      this.equipmentId = params['id'];
+      if (this.equipmentId) {
+        this.store.dispatch(
+          EquipmentPageActions.setCurrentEquipmentId({ id: this.equipmentId })
+        );
+        this.equipment$ = this.store
+          .select(getCurrentEquipment)
+          .pipe(
+            tap((currentEquipment) => this.displayEquipment(currentEquipment))
+          );
+      }
+    });
+    this.equipment$ = this.store
+      .select(getCurrentEquipment)
+      .pipe(tap((currentEquipment) => this.displayEquipment(currentEquipment)));
+    this.isLoading$ = this.store.select(getIsLoading);
   }
 
   private initForm() {
     this.addEquipmentForm = new FormGroup({
-      name: new FormControl(this.equipment.name, Validators.required),
-      description: new FormControl(this.equipment.description),
-      quantity: new FormControl(this.equipment.quantity),
-      serialNumber: new FormControl(
-        this.equipment.serialNumber,
-        Validators.required
-      ),
-      manufacturer: new FormControl(
-        this.equipment.manufacturer,
-        Validators.required
-      ),
-      installationDate: new FormControl(this.equipment.installationDate),
-      powerRequirement: new FormControl(
-        this.equipment.powerRequirement,
-        Validators.required
-      ),
-      location: new FormControl(this.equipment.location, Validators.required),
+      name: new FormControl('', Validators.required),
+      description: new FormControl(''),
+      quantity: new FormControl(0),
+      serialNumber: new FormControl('', Validators.required),
+      manufacturer: new FormControl('', Validators.required),
+      installationDate: new FormControl(''),
+      powerRequirement: new FormControl('', Validators.required),
+      location: new FormControl('', Validators.required),
     });
   }
 
-  onSubmit() {
-    if (this.id && this.addEquipmentForm.valid) {
-      this.equipmentService
-        .update<{ status: string }>(this.id, this.addEquipmentForm.value)
-        .subscribe((result) => {
-          if (result.status === 'success') {
-            this._snackBar.open('Updated', 'Close', {
-              horizontalPosition: 'center',
-              verticalPosition: 'bottom',
-            });
-          }
-        });
-    } else {
-      if (this.addEquipmentForm.valid) {
-        this.equipmentService
-          .create<{ status: string }>(this.addEquipmentForm.value)
-          .subscribe((result) => {
-            if (result.status === 'success') {
-              this._snackBar.open('Created', 'Close', {
-                horizontalPosition: 'center',
-                verticalPosition: 'bottom',
-              });
-              this.router.navigate(['equipments']);
-            }
-          });
+  private displayEquipment(equipment: Equipment | null): void {
+    this.addEquipmentForm.reset();
+
+    if (equipment) {
+      // Reset the form back to pristine
+      // Display the appropriate page title
+      if (equipment._id === undefined) {
+        this.title = 'Add Equipment';
+      } else {
+        this.title = `Edit Equipment: ${equipment.name}`;
+      }
+
+      // Update the data on the form
+      this.addEquipmentForm.patchValue({
+        name: equipment.name,
+        description: equipment.description,
+        quantity: equipment.quantity,
+        serialNumber: equipment.serialNumber,
+        manufacturer: equipment.manufacturer,
+        installationDate: equipment.installationDate,
+        powerRequirement: equipment.powerRequirement,
+        location: equipment.location,
+      });
+    }
+  }
+
+  saveEquipment(id: string) {
+    if (this.addEquipmentForm.valid) {
+      if (this.equipmentId) {
+        this.store.dispatch(
+          EquipmentPageActions.updateEquipment({
+            id,
+            equipment: this.addEquipmentForm.value,
+          })
+        );
+        this._snackBar.open('Updated!', 'Close', { duration: 1000 });
+      } else {
+        const equipment = this.addEquipmentForm.value;
+        this.store.dispatch(
+          EquipmentPageActions.craeteEquipment({
+            equipment,
+          })
+        );
+        this._snackBar.open('Created!', 'Close', { duration: 1000 });
       }
     }
   }

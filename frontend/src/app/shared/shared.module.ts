@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { sharedReducer } from './state/shared.reducer';
 @NgModule({
   declarations: [ConfirmationComponent],
   imports: [
@@ -25,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('shared', sharedReducer),
   ],
   exports: [
     ConfirmationComponent,
