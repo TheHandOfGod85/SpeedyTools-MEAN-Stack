@@ -1,5 +1,5 @@
 export interface Equipment {
-  _id?: string;
+  _id?: string | null;
   name: string;
   description: string;
   quantity: number;

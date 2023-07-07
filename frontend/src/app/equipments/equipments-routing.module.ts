@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EquipmentsComponent } from './equipments.component';
-import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.component';
-import { EquipmentsListComponent } from './equipments-list/equipments-list.component';
-import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
+import { EquipmentDetailComponent } from './components/equipment-detail/equipment-detail.component';
+import { EquipmentsListComponent } from './components/equipments-list/equipments-list.component';
+import { AddEquipmentComponent } from './components/add-equipment/add-equipment.component';
 
 const routes: Routes = [
   {

@@ -1,6 +1,21 @@
-<form [formGroup]="addEquipmentForm" (ngSubmit)="onSubmit()">
-  <div class="container">
+<div
+  class="d-flex flex-column align-items-center justify-content-center h-100"
+  *ngIf="isLoading$ | async"
+>
+  <div class="spinner-border" role="status">
+    <span>Loading...</span>
+  </div>
+</div>
+<div class="container" *ngIf="equipment$ | async as equimpment">
+  <form
+    *ngIf="!(isLoading$ | async)"
+    [formGroup]="addEquipmentForm"
+    (ngSubmit)="saveEquipment(equimpment._id)"
+  >
     <mat-card class="bg-light shadow-lg">
+      <div class="text-center fw-bold fs-4">
+        {{ title }}
+      </div>
       <mat-card-content>
         <!--name-->
         <div class="row justify-content-center">
@@ -155,6 +170,9 @@
             >
               Please enter a location
             </p>
+            <p *ngIf="error$ | async as error" class="alert alert-warning">
+              {{ error }}
+            </p>
             <div class="text-end mt-5">
               <button
                 class="btn btn-secondary"
@@ -174,5 +192,5 @@
         </div>
       </mat-card-content>
     </mat-card>
-  </div>
-</form>
+  </form>
+</div>

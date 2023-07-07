@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { sharedReducer } from './state/shared.reducer';
 @NgModule({
   declarations: [ConfirmationComponent],
   imports: [
@@ -25,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('shared', sharedReducer),
   ],
   exports: [
     ConfirmationComponent,

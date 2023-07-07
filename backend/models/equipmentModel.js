@@ -31,7 +31,9 @@ const equipmentSchema = new mongoose.Schema({
   },
 })
 
-equipmentSchema.plugin(uniqueValidator)
+equipmentSchema.plugin(uniqueValidator, {
+  message: 'Expected to be unique.',
+})
 
 const Equipment = mongoose.model('Equipment', equipmentSchema)
 
