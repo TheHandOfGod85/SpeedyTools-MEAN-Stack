@@ -5,7 +5,12 @@ export const loadEquipments = createAction('[Equipment Page] Load');
 
 export const updateEquipment = createAction(
   '[Equipment Page] Update equipment',
-  props<{ id: string; equipment: Equipment }>()
+  props<{
+    id: string;
+    equipment: Equipment;
+    redirect: string;
+    message: string;
+  }>()
 );
 
 export const setCurrentEquipmentId = createAction(
@@ -19,5 +24,5 @@ export const deleteEquipment = createAction(
 );
 export const craeteEquipment = createAction(
   '[Equipment Page] Create Equipment',
-  props<{ equipment: Equipment }>()
+  props<{ equipment: Equipment; redirect: string; message: string }>()
 );

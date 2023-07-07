@@ -25,6 +25,11 @@ export const getIsLoading = createSelector(
   (state) => state.isLoading
 );
 
+export const getError = createSelector(
+  getEquipmentFeatureState,
+  (state) => state.error
+);
+
 export const getCurrentEquipment = createSelector(
   getEquipmentFeatureState,
   getCurrentEquipmentId,

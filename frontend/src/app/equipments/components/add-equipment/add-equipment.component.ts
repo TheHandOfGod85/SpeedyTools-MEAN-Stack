@@ -2,9 +2,8 @@ import { Equipment } from '../../models/equipment.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { State, getIsLoading } from '../../state';
+import { State, getError, getIsLoading } from '../../state';
 import { EquipmentPageActions } from '../../state/actions';
 import { Observable, tap } from 'rxjs';
 import { getCurrentEquipment } from '../../state';
@@ -18,15 +17,11 @@ export class AddEquipmentComponent implements OnInit, OnDestroy {
   addEquipmentForm: FormGroup;
   equipment$: Observable<Equipment | null>;
   isLoading$: Observable<boolean>;
+  error$: Observable<string>;
   title: string = '';
   equipmentId: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    private store: Store<State>
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store<State>) {}
   ngOnDestroy(): void {
     this.store.dispatch(
       EquipmentPageActions.setCurrentEquipmentId({ id: null })
@@ -52,6 +47,7 @@ export class AddEquipmentComponent implements OnInit, OnDestroy {
       .select(getCurrentEquipment)
       .pipe(tap((currentEquipment) => this.displayEquipment(currentEquipment)));
     this.isLoading$ = this.store.select(getIsLoading);
+    this.error$ = this.store.select(getError);
   }
 
   private initForm() {
@@ -71,7 +67,6 @@ export class AddEquipmentComponent implements OnInit, OnDestroy {
     this.addEquipmentForm.reset();
 
     if (equipment) {
-      // Reset the form back to pristine
       // Display the appropriate page title
       if (equipment._id === undefined) {
         this.title = 'Add Equipment';
@@ -100,17 +95,19 @@ export class AddEquipmentComponent implements OnInit, OnDestroy {
           EquipmentPageActions.updateEquipment({
             id,
             equipment: this.addEquipmentForm.value,
+            redirect: '/equipments',
+            message: 'Equipment updated successfully!',
           })
         );
-        this._snackBar.open('Updated!', 'Close', { duration: 1000 });
       } else {
         const equipment = this.addEquipmentForm.value;
         this.store.dispatch(
           EquipmentPageActions.craeteEquipment({
             equipment,
+            redirect: '/equipments',
+            message: 'Equipment created successfully!',
           })
         );
-        this._snackBar.open('Created!', 'Close', { duration: 1000 });
       }
     }
   }

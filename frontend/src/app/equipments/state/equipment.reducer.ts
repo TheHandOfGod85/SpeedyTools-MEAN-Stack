@@ -76,6 +76,16 @@ export const equipmentReducer = createReducer<EquipmentState>(
       };
     }
   ),
+  on(
+    EquipmentApiActions.updateEquipmentFailure,
+    (state, action): EquipmentState => {
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false,
+      };
+    }
+  ),
   on(EquipmentPageActions.deleteEquipment, (state, action): EquipmentState => {
     return {
       ...state,
@@ -93,6 +103,16 @@ export const equipmentReducer = createReducer<EquipmentState>(
       };
     }
   ),
+  on(
+    EquipmentApiActions.deleteEquipmentFailure,
+    (state, action): EquipmentState => {
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false,
+      };
+    }
+  ),
   on(EquipmentPageActions.craeteEquipment, (state, action): EquipmentState => {
     return {
       ...state,
@@ -106,6 +126,16 @@ export const equipmentReducer = createReducer<EquipmentState>(
         ...state,
         equipments: [...state.equipments, action.equipment],
         error: '',
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    EquipmentApiActions.createEquipmentFailure,
+    (state, action): EquipmentState => {
+      return {
+        ...state,
+        error: action.error,
         isLoading: false,
       };
     }

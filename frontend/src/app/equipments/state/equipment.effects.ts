@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EquipmentService } from '../services/equipments.service';
-import { concatMap, map, mergeMap, tap } from 'rxjs';
+import { catchError, concatMap, map, mergeMap, of, tap } from 'rxjs';
 import { EquipmentApiActions, EquipmentPageActions } from './actions';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class EquipmentEffects {
   constructor(
     private actions$: Actions,
-    private equipmentService: EquipmentService
+    private equipmentService: EquipmentService,
+    private router: Router,
+    private _snackbar: MatSnackBar
   ) {}
 
   loadEquipments$ = createEffect(() => {
@@ -20,6 +25,13 @@ export class EquipmentEffects {
             EquipmentApiActions.loadEquipmentsSuccess({
               equipments: result.data.equipments,
             })
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              EquipmentApiActions.loadEquipmentsFailure({
+                error: error.error.message,
+              })
+            )
           )
         )
       )
@@ -35,6 +47,21 @@ export class EquipmentEffects {
             EquipmentApiActions.updateEquipmentSuccess({
               equipment: result.data.equipment,
             })
+          ),
+          tap((success) => {
+            if (
+              success.type === EquipmentApiActions.updateEquipmentSuccess.type
+            ) {
+              this.router.navigateByUrl(action.redirect);
+              this._snackbar.open(action.message, 'X', { duration: 1000 });
+            }
+          }),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              EquipmentApiActions.updateEquipmentFailure({
+                error: error.error.message,
+              })
+            )
           )
         )
       )
@@ -44,13 +71,18 @@ export class EquipmentEffects {
     return this.actions$.pipe(
       ofType(EquipmentPageActions.deleteEquipment),
       mergeMap((action) => {
-        return this.equipmentService
-          .delete(action.id)
-          .pipe(
-            map(() =>
-              EquipmentApiActions.deleteEquipmentSuccess({ id: action.id })
+        return this.equipmentService.delete(action.id).pipe(
+          map(() =>
+            EquipmentApiActions.deleteEquipmentSuccess({ id: action.id })
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              EquipmentApiActions.deleteEquipmentFailure({
+                error: error.error.message,
+              })
             )
-          );
+          )
+        );
       })
     );
   });
@@ -63,7 +95,22 @@ export class EquipmentEffects {
             EquipmentApiActions.createEquipmentSuccess({
               equipment: result.data.equipment,
             })
-          )
+          ),
+          tap((success) => {
+            if (
+              success.type === EquipmentApiActions.createEquipmentSuccess.type
+            ) {
+              this.router.navigateByUrl(action.redirect);
+              this._snackbar.open(action.message, 'X', { duration: 1000 });
+            }
+          }),
+          catchError((error: HttpErrorResponse) => {
+            return of(
+              EquipmentApiActions.createEquipmentFailure({
+                error: error.error.message,
+              })
+            );
+          })
         );
       })
     );

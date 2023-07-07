@@ -170,6 +170,9 @@
             >
               Please enter a location
             </p>
+            <p *ngIf="error$ | async as error" class="alert alert-warning">
+              {{ error }}
+            </p>
             <div class="text-end mt-5">
               <button
                 class="btn btn-secondary"
