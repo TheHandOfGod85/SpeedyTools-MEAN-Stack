@@ -1,11 +1,7 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer } from '@ngrx/store'
 
-export interface SharedState {
-  isLoading: boolean;
-}
+export interface SharedState {}
 
-const initialState: SharedState = {
-  isLoading: false,
-};
+const initialState: SharedState = {}
 
-export const sharedReducer = createReducer<SharedState>(initialState);
+export const sharedReducer = createReducer<SharedState>(initialState)
