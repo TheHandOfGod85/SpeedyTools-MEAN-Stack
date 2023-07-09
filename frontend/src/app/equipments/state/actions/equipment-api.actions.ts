@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { Equipment } from '../../models/equipment.model';
-import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadEquipmentsSuccess = createAction(
   '[Equipment API] Load Success',

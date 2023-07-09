@@ -19,7 +19,7 @@ export class EquipmentEffects {
     loadEquipments$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(EquipmentPageActions.loadEquipments),
-            concatMap(() =>
+            mergeMap(() =>
                 this.equipmentService.getAll().pipe(
                     map((result) =>
                         EquipmentApiActions.loadEquipmentsSuccess({

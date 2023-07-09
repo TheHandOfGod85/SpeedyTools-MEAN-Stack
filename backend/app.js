@@ -21,7 +21,8 @@ app.use(helmet())
 // CORS
 app.use(
     cors({
-        origin: 'http://localhost:4200'
+        origin: 'http://localhost:4200',
+        credentials: true
     })
 )
 // developement logging

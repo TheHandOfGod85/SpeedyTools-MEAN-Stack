@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
-import { CoreModule } from './core/core.module'
 import { SharedModule } from './shared/shared.module'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
 import { HttpErrorHandlerProvider } from './core/interceptors/http-error.interceptor'
+import { httpRequestInterceptorProviders } from './core/interceptors/http-request.interceptor'
+import { CoreModule } from './core/core.module'
 
 @NgModule({
     declarations: [AppComponent],
@@ -29,7 +30,7 @@ import { HttpErrorHandlerProvider } from './core/interceptors/http-error.interce
         }),
         EffectsModule.forRoot([])
     ],
-    providers: [HttpErrorHandlerProvider],
+    providers: [HttpErrorHandlerProvider, httpRequestInterceptorProviders],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
