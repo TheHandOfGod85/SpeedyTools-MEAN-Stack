@@ -15,7 +15,7 @@ router
     .patch(equipmentController.updateEquipment)
     .delete(
         authController.protect,
-        authController.restrictTo('admin'),
+        // authController.restrictTo('admin'),
         equipmentController.deleteEquipment
     )
 

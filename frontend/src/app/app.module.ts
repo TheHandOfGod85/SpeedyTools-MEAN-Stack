@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects'
 import { HttpErrorHandlerProvider } from './core/interceptors/http-error.interceptor'
 import { httpRequestInterceptorProviders } from './core/interceptors/http-request.interceptor'
 import { CoreModule } from './core/core.module'
+import { JwtModule } from '@auth0/angular-jwt'
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,7 +29,15 @@ import { CoreModule } from './core/core.module'
             maxAge: 25,
             logOnly: !isDevMode()
         }),
-        EffectsModule.forRoot([])
+        EffectsModule.forRoot([]),
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem('token')
+                },
+                allowedDomains: ['http://localhost:3000']
+            }
+        })
     ],
     providers: [HttpErrorHandlerProvider, httpRequestInterceptorProviders],
     bootstrap: [AppComponent]
