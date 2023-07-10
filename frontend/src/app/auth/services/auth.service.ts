@@ -58,6 +58,33 @@ export class AuthService {
             )
     }
 
+    register(
+        name: string,
+        email: string,
+        password: string,
+        passwordConfirm: string
+    ) {
+        return this.http
+            .post<AuthResponse>(this.authUrl + 'signup', {
+                email,
+                password,
+                passwordConfirm,
+                name
+            })
+            .pipe(
+                map((response: AuthResponse) => {
+                    if (response.status === 'success') {
+                        localStorage.setItem(this.TOKEN_NAME, response.token)
+                        this.tokenSubject.next(response.token)
+                        localStorage.setItem(
+                            this.USER,
+                            JSON.stringify(response.data.user)
+                        )
+                    }
+                })
+            )
+    }
+
     logout(): void {
         localStorage.removeItem(this.TOKEN_NAME)
         this.tokenSubject.next(null)

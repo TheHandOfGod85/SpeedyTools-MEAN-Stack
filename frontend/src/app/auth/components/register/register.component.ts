@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { AuthService } from '../../services/auth.service'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Component({
     selector: 'app-register',
@@ -11,6 +12,7 @@ import { AuthService } from '../../services/auth.service'
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup
+    error: string
 
     constructor(private authService: AuthService, private router: Router) {}
 
@@ -21,6 +23,7 @@ export class RegisterComponent implements OnInit {
     private initForm() {
         this.registerForm = new FormGroup(
             {
+                name: new FormControl('', [Validators.required]),
                 email: new FormControl('', [
                     Validators.required,
                     Validators.email
@@ -29,7 +32,7 @@ export class RegisterComponent implements OnInit {
                     Validators.required,
                     Validators.minLength(8)
                 ]),
-                confirmPassword: new FormControl('', [
+                passwordConfirm: new FormControl('', [
                     Validators.required,
                     Validators.minLength(8)
                 ])
@@ -39,12 +42,21 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
+        const name = this.registerForm.controls['name'].value
         const email = this.registerForm.controls['email'].value
         const password = this.registerForm.controls['password'].value
+        const passwordConfirm =
+            this.registerForm.controls['passwordConfirm'].value
         if (this.registerForm.valid) {
             this.authService
-                .login(email, password)
-                .subscribe(() => this.router.navigateByUrl('/equipments'))
+                .register(name, email, password, passwordConfirm)
+                .subscribe({
+                    next: () => this.router.navigateByUrl('/equipments'),
+                    error: (error: HttpErrorResponse) => {
+                        this.error = error.error.message
+                        this.registerForm.reset()
+                    }
+                })
         }
     }
 }

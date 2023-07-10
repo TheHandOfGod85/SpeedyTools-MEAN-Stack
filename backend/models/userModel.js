@@ -89,6 +89,6 @@ userSchema.methods.createPasswordResetToken = function () {
     console.log({ resetToken }, this.passwordResetToken)
     return resetToken
 }
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(uniqueValidator, { message: 'Expected to be unique.' })
 const User = mongoose.model('User', userSchema)
 module.exports = User

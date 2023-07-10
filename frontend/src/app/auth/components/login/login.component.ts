@@ -34,8 +34,10 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             this.authService.login(email, password).subscribe({
                 next: () => this.router.navigateByUrl('/equipments'),
-                error: (error: HttpErrorResponse) =>
-                    (this.error = error.error.message)
+                error: (error: HttpErrorResponse) => {
+                    this.error = error.error.message
+                    this.loginForm.reset()
+                }
             })
         }
     }
