@@ -4,12 +4,12 @@ export const matchPassword = (
     control: AbstractControl
 ): ValidationErrors | null => {
     let password = control.get('password')
-    let passwordConfirm = control.get('passwordConfirm')
+    let confirmPassword = control.get('confirmPassword')
 
     if (
         password &&
-        passwordConfirm &&
-        password?.value != passwordConfirm?.value
+        confirmPassword &&
+        password?.value != confirmPassword?.value
     ) {
         return { passwordMismatch: true }
     }

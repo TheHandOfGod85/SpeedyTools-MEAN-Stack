@@ -29,14 +29,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                             `error status : ${error.status}  ${error.statusText}`
                         )
                         switch (error.status) {
-                            case 401:
-                                this.router.navigateByUrl('/')
-                                this.notifier.showError(error.error.message)
-                                break
-                            case 403:
-                                this.router.navigateByUrl('/')
-                                this.notifier.showError(error.error.message)
-                                break
+                            // case 401:
+                            //     this.router.navigateByUrl('/')
+                            //     this.notifier.showError(error.error.message)
+                            //     break
+                            // case 403:
+                            //     this.router.navigateByUrl('/')
+                            //     this.notifier.showError(error.error.message)
+                            //     break
                             case 0:
                                 retry({
                                     count: 3,

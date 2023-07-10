@@ -1,7 +1,7 @@
 <div class="container">
-    <form [formGroup]="loginForm" (submit)="onSubmit()">
+    <form [formGroup]="registerForm" (submit)="onSubmit()">
         <mat-card class="bg-light shadow-lg">
-            <div class="text-center fw-bold fs-4 text-primary">Login</div>
+            <div class="text-center fw-bold fs-4 text-primary">Register</div>
             <mat-card-content>
                 <!-- Email input -->
                 <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
@@ -15,11 +15,12 @@
                     <div
                         class="alert alert-warning fs-6"
                         *ngIf="
-                            !loginForm.get('email').valid &&
-                            loginForm.get('email').touched
+                            !registerForm.get('email').valid &&
+                            registerForm.get('email').touched
                         "
                     >
-                        <span *ngIf="loginForm.get('email').errors['required']"
+                        <span
+                            *ngIf="registerForm.get('email').errors['required']"
                             >Email is required</span
                         >
                     </div>
@@ -37,23 +38,39 @@
                     <div
                         class="alert alert-warning fs-6"
                         *ngIf="
-                            !loginForm.get('password').valid &&
-                            loginForm.get('password').touched
+                            !registerForm.get('password').valid &&
+                            registerForm.get('password').touched
                         "
                     >
                         <span
-                            *ngIf="loginForm.get('password').errors['required']"
+                            *ngIf="
+                                registerForm.get('password').errors['required']
+                            "
                             >Password is required</span
                         >
                         <span
                             *ngIf="
-                                loginForm.get('password').errors['minlength']
+                                registerForm.get('password').errors['minlength']
                             "
                             >Minimum length 8 characters</span
                         >
                     </div>
-                    <div class="alert alert-danger" *ngIf="error">
-                        <span>{{ error }} </span>
+                </div>
+                <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
+                    <input
+                        placeholder="Confirm Password"
+                        type="password"
+                        class="form-control"
+                        formControlName="confirmPassword"
+                        id="confirmPassword"
+                    />
+
+                    <div
+                        class="alert alert-warning fs-6"
+                        *ngIf="registerForm.errors?.['passwordMismatch'] && 
+                        registerForm.get('confirmPassword').touched"
+                    >
+                        <span>Passwords do not match</span>
                     </div>
                 </div>
 
@@ -75,18 +92,14 @@
                         </div>
                     </div> -->
 
-                    <div class="col text-center">
-                        <!-- Simple link -->
-                        <a href="#!">Forgot password?</a>
-                    </div>
                     <!-- Submit button -->
                     <div class="text-center mt-3">
                         <button
-                            [disabled]="loginForm.invalid"
+                            [disabled]="registerForm.invalid"
                             type="submit"
                             class="btn btn-primary btn-block mb-4"
                         >
-                            Sign in
+                            Sign up
                         </button>
                     </div>
                 </div>
@@ -94,8 +107,8 @@
                 <!-- Register buttons -->
                 <div class="text-center">
                     <p>
-                        Not a member?
-                        <a [routerLink]="['/auth/register']">Register</a>
+                        Already registered?
+                        <a [routerLink]="['/auth/login']">Login</a>
                     </p>
                     <!-- <p>or sign up with:</p>
                   <button type="button" class="btn btn-link btn-floating mx-1">
