@@ -13,8 +13,10 @@ import { MatNativeDateModule } from '@angular/material/core'
 import { ReactiveFormsModule } from '@angular/forms'
 import { StoreModule } from '@ngrx/store'
 import { sharedReducer } from './state/shared.reducer'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { FormsModule } from '@angular/forms';
 @NgModule({
-    declarations: [ConfirmationComponent],
+    declarations: [ConfirmationComponent, ],
     imports: [
         CommonModule,
         MatDialogModule,
@@ -27,7 +29,9 @@ import { sharedReducer } from './state/shared.reducer'
         MatDatepickerModule,
         MatNativeDateModule,
         ReactiveFormsModule,
-        StoreModule.forFeature('shared', sharedReducer)
+        StoreModule.forFeature('shared', sharedReducer),
+        MatPaginatorModule,
+        FormsModule
     ],
     exports: [
         ConfirmationComponent,
@@ -41,7 +45,9 @@ import { sharedReducer } from './state/shared.reducer'
         MatFormFieldModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        FormsModule
     ]
 })
 export class SharedModule {}

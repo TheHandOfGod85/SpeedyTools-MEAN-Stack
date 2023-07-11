@@ -21,7 +21,7 @@ export class EquipmentsListComponent {
     ) {}
 
     ngOnInit(): void {
-        this.store.dispatch(EquipmentPageActions.loadEquipments())
+        this.store.dispatch(EquipmentPageActions.loadEquipments(null))
         this.equipments$ = this.store.select(getEquipments)
         this.isLoading$ = this.store.select(getIsLoading)
     }

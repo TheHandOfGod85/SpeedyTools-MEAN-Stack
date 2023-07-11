@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { EquipmentService } from '../services/equipments.service'
-import { catchError, concatMap, map, mergeMap, of, tap, throwError } from 'rxjs'
+import { catchError, concatMap, map, mergeMap, of, tap } from 'rxjs'
 import { EquipmentApiActions, EquipmentPageActions } from './actions'
 import { Router } from '@angular/router'
 import { HttpErrorResponse } from '@angular/common/http'
@@ -19,8 +19,8 @@ export class EquipmentEffects {
     loadEquipments$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(EquipmentPageActions.loadEquipments),
-            mergeMap(() =>
-                this.equipmentService.getAll().pipe(
+            mergeMap((action) =>
+                this.equipmentService.getAll(action.page, action.limit).pipe(
                     map((result) =>
                         EquipmentApiActions.loadEquipmentsSuccess({
                             equipments: result.data.equipments
