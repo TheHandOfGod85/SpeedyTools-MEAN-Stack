@@ -21,11 +21,12 @@ export class EquipmentEffects {
             ofType(EquipmentPageActions.loadEquipments),
             mergeMap((action) =>
                 this.equipmentService.getAll(action.page, action.limit).pipe(
-                    map((result) =>
-                        EquipmentApiActions.loadEquipmentsSuccess({
-                            equipments: result.data.equipments
+                    map((result) => {
+                        return EquipmentApiActions.loadEquipmentsSuccess({
+                            equipments: result.data.equipments,
+                            count: result.results
                         })
-                    ),
+                    }),
                     catchError((error: HttpErrorResponse) =>
                         of(
                             EquipmentApiActions.loadEquipmentsFailure({

@@ -13,6 +13,7 @@ import { HttpErrorHandlerProvider } from './core/interceptors/http-error.interce
 import { httpRequestInterceptorProviders } from './core/interceptors/http-request.interceptor'
 import { CoreModule } from './core/core.module'
 import { JwtModule } from '@auth0/angular-jwt'
+import { PaginatorIntlProvider } from './equipments/services/paginatorIntl.service'
 
 @NgModule({
     declarations: [AppComponent],
@@ -39,7 +40,11 @@ import { JwtModule } from '@auth0/angular-jwt'
             }
         })
     ],
-    providers: [HttpErrorHandlerProvider, httpRequestInterceptorProviders],
+    providers: [
+        HttpErrorHandlerProvider,
+        httpRequestInterceptorProviders,
+        PaginatorIntlProvider
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

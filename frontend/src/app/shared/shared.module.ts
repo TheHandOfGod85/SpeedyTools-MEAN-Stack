@@ -14,9 +14,10 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { StoreModule } from '@ngrx/store'
 import { sharedReducer } from './state/shared.reducer'
 import { MatPaginatorModule } from '@angular/material/paginator'
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
+import { NgxPaginationModule } from 'ngx-pagination'
 @NgModule({
-    declarations: [ConfirmationComponent, ],
+    declarations: [ConfirmationComponent],
     imports: [
         CommonModule,
         MatDialogModule,
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
         ReactiveFormsModule,
         StoreModule.forFeature('shared', sharedReducer),
         MatPaginatorModule,
-        FormsModule
+        FormsModule,
+        NgxPaginationModule
     ],
     exports: [
         ConfirmationComponent,
@@ -47,7 +49,8 @@ import { FormsModule } from '@angular/forms';
         MatNativeDateModule,
         ReactiveFormsModule,
         MatPaginatorModule,
-        FormsModule
+        FormsModule,
+        NgxPaginationModule
     ]
 })
 export class SharedModule {}

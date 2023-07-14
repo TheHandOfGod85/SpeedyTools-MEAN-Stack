@@ -62,6 +62,15 @@
             <div class="text-center" *ngIf="equipments$ | async as equipments">
                 <p *ngIf="equipments.length === 0">No equipments</p>
             </div>
+            <mat-paginator
+                [length]="count$ | async"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[3, 6, 9]"
+                [showFirstLastButtons]="true"
+                [pageIndex]="page"
+                (page)="handlePageChange($event)"
+            >
+            </mat-paginator>
         </div>
     </div>
 </div>

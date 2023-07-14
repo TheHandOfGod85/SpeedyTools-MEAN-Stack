@@ -25,6 +25,7 @@ export class EquipmentService extends DataService<Result, Equipment> {
 
 interface Result {
     status: string
+    results?: number
     data: {
         equipments: Equipment[]
         equipment: Equipment

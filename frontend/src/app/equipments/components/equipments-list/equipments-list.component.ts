@@ -2,9 +2,15 @@ import { Component } from '@angular/core'
 import { Equipment } from '../../models/equipment.model'
 import { DialogService } from 'src/app/shared/services/dialog.service'
 import { Store } from '@ngrx/store'
-import { getEquipments, getIsLoading, State } from '../../state'
+import {
+    getEquipments,
+    getEquipmentsCount,
+    getIsLoading,
+    State
+} from '../../state'
 import { Observable } from 'rxjs'
 import { EquipmentPageActions } from '../../state/actions'
+import { PageEvent } from '@angular/material/paginator'
 
 @Component({
     selector: 'app-equipments-list',
@@ -14,6 +20,9 @@ import { EquipmentPageActions } from '../../state/actions'
 export class EquipmentsListComponent {
     isLoading$: Observable<boolean>
     equipments$: Observable<Equipment[]>
+    count$: Observable<number>
+    page = 1
+    pageSize = 3
 
     constructor(
         private dialogService: DialogService,
@@ -21,9 +30,15 @@ export class EquipmentsListComponent {
     ) {}
 
     ngOnInit(): void {
-        this.store.dispatch(EquipmentPageActions.loadEquipments(null))
+        this.store.dispatch(
+            EquipmentPageActions.loadEquipments({
+                page: this.page,
+                limit: this.pageSize
+            })
+        )
         this.equipments$ = this.store.select(getEquipments)
         this.isLoading$ = this.store.select(getIsLoading)
+        this.count$ = this.store.select(getEquipmentsCount)
     }
 
     onDeleteEquipment(id: string): void {
@@ -41,5 +56,16 @@ export class EquipmentsListComponent {
                     )
                 }
             })
+    }
+
+    handlePageChange(pageEvent: PageEvent): void {
+        this.page = pageEvent.pageIndex
+        this.pageSize = pageEvent.pageSize
+        this.store.dispatch(
+            EquipmentPageActions.loadEquipments({
+                page: this.page + 1,
+                limit: this.pageSize
+            })
+        )
     }
 }
