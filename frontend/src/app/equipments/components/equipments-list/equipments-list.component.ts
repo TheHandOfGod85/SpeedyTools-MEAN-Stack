@@ -21,6 +21,7 @@ export class EquipmentsListComponent {
     isLoading$: Observable<boolean>
     equipments$: Observable<Equipment[]>
     count$: Observable<number>
+    searchTerm: string = ''
     page = 0
     pageSize = 3
 
@@ -33,7 +34,8 @@ export class EquipmentsListComponent {
         this.store.dispatch(
             EquipmentPageActions.loadEquipments({
                 page: this.page + 1,
-                limit: this.pageSize
+                limit: this.pageSize,
+                name: null
             })
         )
         this.equipments$ = this.store.select(getEquipments)
@@ -64,7 +66,30 @@ export class EquipmentsListComponent {
         this.store.dispatch(
             EquipmentPageActions.loadEquipments({
                 page: this.page + 1,
-                limit: this.pageSize
+                limit: this.pageSize,
+                name: null
+            })
+        )
+    }
+
+    onSearchChange(name: HTMLInputElement): void {
+        this.page = 0
+        if (name.value !== '') {
+            this.store.dispatch(
+                EquipmentPageActions.loadEquipments({
+                    page: null,
+                    limit: null,
+                    name: name.value
+                })
+            )
+        }
+    }
+    onReset(): void {
+        this.store.dispatch(
+            EquipmentPageActions.loadEquipments({
+                page: this.page + 1,
+                limit: this.pageSize,
+                name: null
             })
         )
     }

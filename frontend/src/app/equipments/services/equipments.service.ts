@@ -11,11 +11,20 @@ export class EquipmentService extends DataService<Result, Equipment> {
         super(http)
     }
 
-    override getAll(page?: number, limit?: number): Observable<Result> {
+    override getAll(
+        page?: number,
+        limit?: number,
+        name?: string
+    ): Observable<Result> {
         const params = new HttpParams()
         if (page && limit) {
             const options = {
                 params: params.set('page', page).set('limit', limit)
+            }
+            return this.http.get<Result>(this.url, options)
+        } else if (!page && !limit && name) {
+            const options = {
+                params: params.set('name', name)
             }
             return this.http.get<Result>(this.url, options)
         }

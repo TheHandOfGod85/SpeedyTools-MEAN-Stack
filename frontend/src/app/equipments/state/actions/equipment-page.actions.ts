@@ -3,7 +3,7 @@ import { Equipment } from '../../models/equipment.model'
 
 export const loadEquipments = createAction(
     '[Equipment Page] Load',
-    props<{ page: number | null; limit: number | null }>()
+    props<{ page: number | null; limit: number | null; name: string | null }>()
 )
 
 export const updateEquipment = createAction(

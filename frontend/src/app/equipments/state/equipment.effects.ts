@@ -20,21 +20,23 @@ export class EquipmentEffects {
         return this.actions$.pipe(
             ofType(EquipmentPageActions.loadEquipments),
             mergeMap((action) =>
-                this.equipmentService.getAll(action.page, action.limit).pipe(
-                    map((result) => {
-                        return EquipmentApiActions.loadEquipmentsSuccess({
-                            equipments: result.data.equipments,
-                            count: result.results
-                        })
-                    }),
-                    catchError((error: HttpErrorResponse) =>
-                        of(
-                            EquipmentApiActions.loadEquipmentsFailure({
-                                error: error.error.message
+                this.equipmentService
+                    .getAll(action.page, action.limit, action.name)
+                    .pipe(
+                        map((result) => {
+                            return EquipmentApiActions.loadEquipmentsSuccess({
+                                equipments: result.data.equipments,
+                                count: result.results
                             })
+                        }),
+                        catchError((error: HttpErrorResponse) =>
+                            of(
+                                EquipmentApiActions.loadEquipmentsFailure({
+                                    error: error.error.message
+                                })
+                            )
                         )
                     )
-                )
             )
         )
     })
