@@ -21,7 +21,7 @@ export class EquipmentsListComponent {
     isLoading$: Observable<boolean>
     equipments$: Observable<Equipment[]>
     count$: Observable<number>
-    page = 1
+    page = 0
     pageSize = 3
 
     constructor(
@@ -32,7 +32,7 @@ export class EquipmentsListComponent {
     ngOnInit(): void {
         this.store.dispatch(
             EquipmentPageActions.loadEquipments({
-                page: this.page,
+                page: this.page + 1,
                 limit: this.pageSize
             })
         )
