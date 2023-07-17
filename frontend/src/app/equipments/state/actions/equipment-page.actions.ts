@@ -6,6 +6,11 @@ export const loadEquipments = createAction(
     props<{ page: number | null; limit: number | null; name: string | null }>()
 )
 
+export const loadEquipment = createAction(
+    '[Equipment Page] Load Current Equipment',
+    props<{ id: string }>()
+)
+
 export const updateEquipment = createAction(
     '[Equipment Page] Update equipment',
     props<{

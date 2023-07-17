@@ -1,161 +1,198 @@
-<div class="container">
-    <form [formGroup]="registerForm" (submit)="onSubmit()">
+<div
+    class="d-flex flex-column justify-content-center align-items-center min-vh-100 mx-2"
+>
+    <div class="container" style="max-width: 680px">
         <mat-card class="bg-light shadow-lg">
             <div class="text-center fw-bold fs-4 text-primary">Register</div>
-            <mat-card-content>
-                <!-- Name input -->
-                <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
-                    <input
-                        placeholder="Name"
-                        type="text"
-                        class="form-control"
-                        formControlName="name"
-                        id="name"
-                    />
-                    <div
-                        class="alert alert-warning fs-6"
-                        *ngIf="
-                            !registerForm.get('name').valid &&
-                            registerForm.get('name').touched
-                        "
-                    >
-                        <span
-                            *ngIf="registerForm.get('name').errors['required']"
-                            >Name is required</span
+            <form [formGroup]="registerForm" (submit)="onSubmit()">
+                <mat-card-content>
+                    <!-- Name input -->
+                    <div class="row">
+                        <div
+                            class="col-xs-12 col-md-8 mx-auto form-outline mb-4"
                         >
-                    </div>
-                </div>
-                <!-- Email input -->
-                <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
-                    <input
-                        placeholder="Email"
-                        type="email"
-                        class="form-control"
-                        formControlName="email"
-                        id="email"
-                    />
-                    <div
-                        class="alert alert-warning fs-6"
-                        *ngIf="
-                            !registerForm.get('email').valid &&
-                            registerForm.get('email').touched
-                        "
-                    >
-                        <span
-                            *ngIf="registerForm.get('email').errors['required']"
-                            >Email is required</span
-                        >
-                        <span *ngIf="registerForm.get('email').errors['email']"
-                            >It must be an email</span
-                        >
-                    </div>
-                </div>
-
-                <!-- Password input -->
-                <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
-                    <input
-                        placeholder="Password"
-                        type="password"
-                        class="form-control"
-                        formControlName="password"
-                        id="password"
-                    />
-                    <div
-                        class="alert alert-warning fs-6"
-                        *ngIf="
-                            !registerForm.get('password').valid &&
-                            registerForm.get('password').touched
-                        "
-                    >
-                        <span
-                            *ngIf="
-                                registerForm.get('password').errors['required']
-                            "
-                            >Password is required</span
-                        >
-                        <span
-                            *ngIf="
-                                registerForm.get('password').errors['minlength']
-                            "
-                            >Minimum length 8 characters</span
-                        >
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
-                    <input
-                        placeholder="Confirm Password"
-                        type="password"
-                        class="form-control"
-                        formControlName="passwordConfirm"
-                        id="passwordConfirm"
-                    />
-
-                    <div
-                        class="alert alert-warning fs-6"
-                        *ngIf="registerForm.errors?.['passwordMismatch'] && 
-                        registerForm.get('passwordConfirm').touched"
-                    >
-                        <span>Passwords do not match</span>
-                    </div>
-                    <div *ngIf="error" class="alert alert-danger">
-                        <span>{{ error }} </span>
-                    </div>
-                </div>
-
-                <!-- 2 column grid layout for inline styling -->
-                <!-- Checkbox -->
-                <div class="row mb-4">
-                    <!-- <div class="col d-flex justify-content-center">
-                        <div class="form-check">
                             <input
-                                class="form-check-input"
-                                type="checkbox"
-                                value=""
-                                id="form2Example31"
-                                checked
+                                placeholder="Name"
+                                type="text"
+                                class="form-control"
+                                formControlName="name"
+                                id="name"
                             />
-                            <label class="form-check-label" for="form2Example31">
-                                Remember me
-                            </label>
+                            <div
+                                class="alert alert-warning fs-6"
+                                *ngIf="
+                                    !registerForm.get('name').valid &&
+                                    registerForm.get('name').touched
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        registerForm.get('name').errors[
+                                            'required'
+                                        ]
+                                    "
+                                    >Name is required</span
+                                >
+                            </div>
                         </div>
-                    </div> -->
-
-                    <!-- Submit button -->
-                    <div class="text-center mt-3">
-                        <button
-                            [disabled]="registerForm.invalid"
-                            type="submit"
-                            class="btn btn-primary btn-block mb-4"
-                        >
-                            Sign up
-                        </button>
                     </div>
-                </div>
+                    <!-- Email input -->
+                    <div class="row">
+                        <div
+                            class="col-xs-12 col-md-8 mx-auto form-outline mb-4"
+                        >
+                            <input
+                                placeholder="Email"
+                                type="email"
+                                class="form-control"
+                                formControlName="email"
+                                id="email"
+                            />
+                            <div
+                                class="alert alert-warning fs-6"
+                                *ngIf="
+                                    !registerForm.get('email').valid &&
+                                    registerForm.get('email').touched
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        registerForm.get('email').errors[
+                                            'required'
+                                        ]
+                                    "
+                                    >Email is required</span
+                                >
+                                <span
+                                    *ngIf="
+                                        registerForm.get('email').errors[
+                                            'email'
+                                        ]
+                                    "
+                                    >It must be an email</span
+                                >
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Register buttons -->
-                <div class="text-center">
-                    <p>
-                        Already registered?
-                        <a [routerLink]="['/auth/login']">Login</a>
-                    </p>
-                    <!-- <p>or sign up with:</p>
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                  </button>
-              
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
-                  </button>
-              
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
-                  </button>
-              
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-github"></i>
-                  </button> -->
-                </div>
-            </mat-card-content>
+                    <!-- Password input -->
+                    <div class="row">
+                        <div
+                            class="col-xs-12 col-md-8 mx-auto form-outline mb-4"
+                        >
+                            <input
+                                placeholder="Password"
+                                type="password"
+                                class="form-control"
+                                formControlName="password"
+                                id="password"
+                            />
+                            <div
+                                class="alert alert-warning fs-6"
+                                *ngIf="
+                                    !registerForm.get('password').valid &&
+                                    registerForm.get('password').touched
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        registerForm.get('password').errors[
+                                            'required'
+                                        ]
+                                    "
+                                    >Password is required</span
+                                >
+                                <span
+                                    *ngIf="
+                                        registerForm.get('password').errors[
+                                            'minlength'
+                                        ]
+                                    "
+                                    >Minimum length 8 characters</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div
+                            class="col-xs-12 col-md-8 mx-auto form-outline mb-4"
+                        >
+                            <input
+                                placeholder="Confirm Password"
+                                type="password"
+                                class="form-control"
+                                formControlName="passwordConfirm"
+                                id="passwordConfirm"
+                            />
+
+                            <div
+                                class="alert alert-warning fs-6"
+                                *ngIf="registerForm.errors?.['passwordMismatch'] && 
+                                registerForm.get('passwordConfirm').touched"
+                            >
+                                <span>Passwords do not match</span>
+                            </div>
+                            <div *ngIf="error" class="alert alert-danger">
+                                <span>{{ error }} </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2 column grid layout for inline styling -->
+                    <!-- Checkbox -->
+                    <div class="row mb-4">
+                        <!-- <div class="col d-flex justify-content-center">
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="form2Example31"
+                                    checked
+                                />
+                                <label class="form-check-label" for="form2Example31">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div> -->
+
+                        <!-- Submit button -->
+                        <div class="text-center mt-3">
+                            <button
+                                [disabled]="registerForm.invalid"
+                                type="submit"
+                                class="btn btn-primary btn-block mb-4"
+                            >
+                                Sign up
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                        <p>
+                            Already registered?
+                            <a [routerLink]="['/auth/login']">Login</a>
+                        </p>
+                        <!-- <p>or sign up with:</p>
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-facebook-f"></i>
+                      </button>
+                  
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-google"></i>
+                      </button>
+                  
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-twitter"></i>
+                      </button>
+                  
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-github"></i>
+                      </button> -->
+                    </div>
+                </mat-card-content>
+            </form>
         </mat-card>
-    </form>
+    </div>
 </div>

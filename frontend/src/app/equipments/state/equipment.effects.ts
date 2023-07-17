@@ -41,6 +41,28 @@ export class EquipmentEffects {
         )
     })
 
+    loadEquipment$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(EquipmentPageActions.loadEquipment),
+            concatMap((action) =>
+                this.equipmentService.get(action.id).pipe(
+                    map((result) => {
+                        return EquipmentApiActions.loadEquipmentSuccess({
+                            equipment: result.data.equipment
+                        })
+                    }),
+                    catchError((error: HttpErrorResponse) =>
+                        of(
+                            EquipmentApiActions.loadEquipmentFailure({
+                                error: error.error.message
+                            })
+                        )
+                    )
+                )
+            )
+        )
+    })
+
     updateEquipment$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(EquipmentPageActions.updateEquipment),

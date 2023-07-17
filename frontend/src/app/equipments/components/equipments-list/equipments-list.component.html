@@ -6,94 +6,98 @@
         <span>Loading...</span>
     </div>
 </div>
-
-<div class="container" *ngIf="!(isLoading$ | async)">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1 class="fw-bold text-center">Equipments</h1>
-            <div class="d-flex justify-content-center">
-                <div>
-                    <button class="btn btn-primary me-2" (click)="onReset()">
-                        Reset
-                    </button>
-                </div>
-                <div class="mb-3 me-2">
-                    <input
-                        type="search"
-                        class="form-control"
-                        placeholder="Search name"
-                        #search
-                    />
-                </div>
-                <div>
-                    <button
-                        class="btn btn-primary"
-                        (click)="onSearchChange(search)"
-                    >
-                        Search
-                    </button>
-                </div>
+<body class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container" *ngIf="!(isLoading$ | async)">
+        <h1 class="fw-bold text-center">Equipments</h1>
+        <div class="row">
+            <div class="col">
+                <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search name"
+                    #search
+                />
             </div>
-            <div class="mb-2">
-                <a
-                    class="btn btn-primary btn-sm"
-                    type="button"
-                    [routerLink]="'add'"
-                    >Add</a
+            <div class="col">
+                <button
+                    class="btn btn-primary"
+                    (click)="onSearchChange(search)"
                 >
+                    Search
+                </button>
+                <button class="btn btn-primary ms-2" (click)="onReset()">
+                    Reset
+                </button>
             </div>
-            <table class="table shadow-lg table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Power</th>
-                        <th scope="col">Installation</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="equipments$ | async as equipments">
-                    <tr scope="row" *ngFor="let equip of equipments">
-                        <td>{{ equip.name }}</td>
-                        <td>{{ equip.powerRequirement }}</td>
-                        <td class="text-nowrap">
-                            {{ equip.installationDate | date : 'dd-MM-yyyy' }}
-                        </td>
-                        <td class="text-nowrap">
-                            <button
-                                class="btn btn-secondary btn-sm me-1"
-                                [routerLink]="[equip._id]"
-                            >
-                                View
-                            </button>
-                            <a
-                                class="btn btn-primary btn-sm me-1"
-                                type="button"
-                                [routerLink]="[equip._id + '/edit']"
-                                >Edit</a
-                            >
-                            <button
-                                class="btn btn-danger btn-sm"
-                                type="button"
-                                (click)="onDeleteEquipment(equip._id)"
-                            >
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="text-center" *ngIf="equipments$ | async as equipments">
-                <p *ngIf="equipments.length === 0">No equipments</p>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="my-2">
+                    <a
+                        class="btn btn-primary btn-sm"
+                        type="button"
+                        [routerLink]="'add'"
+                        >Add</a
+                    >
+                </div>
+                <table class="table shadow-lg table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Power</th>
+                            <th scope="col">Installation</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="equipments$ | async as equipments">
+                        <tr scope="row" *ngFor="let equip of equipments">
+                            <td>{{ equip.name }}</td>
+                            <td>{{ equip.powerRequirement }}</td>
+                            <td class="text-nowrap">
+                                {{
+                                    equip.installationDate | date : 'dd-MM-yyyy'
+                                }}
+                            </td>
+                            <td class="text-nowrap">
+                                <button
+                                    class="btn btn-secondary btn-sm me-1"
+                                    [routerLink]="[equip._id]"
+                                >
+                                    View
+                                </button>
+                                <a
+                                    class="btn btn-primary btn-sm me-1"
+                                    type="button"
+                                    [routerLink]="[equip._id + '/edit']"
+                                    >Edit</a
+                                >
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    type="button"
+                                    (click)="onDeleteEquipment(equip._id)"
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div
+                    class="text-center"
+                    *ngIf="equipments$ | async as equipments"
+                >
+                    <p *ngIf="equipments.length === 0">No equipments</p>
+                </div>
+                <mat-paginator
+                    [length]="count$ | async"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[5, 10]"
+                    [showFirstLastButtons]="true"
+                    [pageIndex]="page"
+                    (page)="handlePageChange($event)"
+                >
+                </mat-paginator>
             </div>
-            <mat-paginator
-                [length]="count$ | async"
-                [pageSize]="pageSize"
-                [pageSizeOptions]="[3, 6, 9]"
-                [showFirstLastButtons]="true"
-                [pageIndex]="page"
-                (page)="handlePageChange($event)"
-            >
-            </mat-paginator>
         </div>
     </div>
-</div>
+</body>

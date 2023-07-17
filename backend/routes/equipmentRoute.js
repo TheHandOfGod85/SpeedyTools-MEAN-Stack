@@ -6,7 +6,8 @@ const router = express.Router()
 
 router
     .route('/')
-    .get(authController.protect, equipmentController.getAllEquipments)
+    // .get(authController.protect, equipmentController.getAllEquipments)
+    .get(equipmentController.getAllEquipments)
     .post(equipmentController.createEquipment)
 
 router

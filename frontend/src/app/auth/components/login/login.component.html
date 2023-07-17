@@ -1,66 +1,85 @@
-<div class="container">
-    <form [formGroup]="loginForm" (submit)="onSubmit()">
+<div
+    class="d-flex flex-column justify-content-center align-items-center min-vh-100 mx-2"
+>
+    <div class="container" style="max-width: 680px">
         <mat-card class="bg-light shadow-lg">
             <div class="text-center fw-bold fs-4 text-primary">Login</div>
-            <mat-card-content>
-                <!-- Email input -->
-                <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
-                    <input
-                        placeholder="Email"
-                        type="email"
-                        class="form-control"
-                        formControlName="email"
-                        id="email"
-                    />
-                    <div
-                        class="alert alert-warning fs-6"
-                        *ngIf="
-                            !loginForm.get('email').valid &&
-                            loginForm.get('email').touched
-                        "
-                    >
-                        <span *ngIf="loginForm.get('email').errors['required']"
-                            >Email is required</span
+            <form [formGroup]="loginForm" (submit)="onSubmit()">
+                <mat-card-content>
+                    <!-- Email input -->
+                    <div class="row">
+                        <div
+                            class="col-sm-11 col-md-8 mx-auto form-outline mb-4"
                         >
+                            <input
+                                placeholder="Email"
+                                type="email"
+                                class="form-control"
+                                formControlName="email"
+                                id="email"
+                            />
+                            <div
+                                class="alert alert-warning fs-6"
+                                *ngIf="
+                                    !loginForm.get('email').valid &&
+                                    loginForm.get('email').touched
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        loginForm.get('email').errors[
+                                            'required'
+                                        ]
+                                    "
+                                    >Email is required</span
+                                >
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Password input -->
-                <div class="col-xs-12 col-md-8 mx-auto form-outline mb-4">
-                    <input
-                        placeholder="Password"
-                        type="password"
-                        class="form-control"
-                        formControlName="password"
-                        id="password"
-                    />
-                    <div
-                        class="alert alert-warning fs-6"
-                        *ngIf="
-                            !loginForm.get('password').valid &&
-                            loginForm.get('password').touched
-                        "
-                    >
-                        <span
-                            *ngIf="loginForm.get('password').errors['required']"
-                            >Password is required</span
+                    <!-- Password input -->
+                    <div class="row">
+                        <div
+                            class="col-xs-12 col-md-8 mx-auto form-outline mb-4"
                         >
-                        <span
-                            *ngIf="
-                                loginForm.get('password').errors['minlength']
-                            "
-                            >Minimum length 8 characters</span
-                        >
+                            <input
+                                placeholder="Password"
+                                type="password"
+                                class="form-control"
+                                formControlName="password"
+                                id="password"
+                            />
+                            <div
+                                class="alert alert-warning fs-6"
+                                *ngIf="
+                                    !loginForm.get('password').valid &&
+                                    loginForm.get('password').touched
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        loginForm.get('password').errors[
+                                            'required'
+                                        ]
+                                    "
+                                    >Password is required</span
+                                >
+                                <span
+                                    *ngIf="
+                                        loginForm.get('password').errors[
+                                            'minlength'
+                                        ]
+                                    "
+                                    >Minimum length 8 characters</span
+                                >
+                            </div>
+                            <div class="alert alert-danger" *ngIf="error">
+                                <span>{{ error }} </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="alert alert-danger" *ngIf="error">
-                        <span>{{ error }} </span>
-                    </div>
-                </div>
-
-                <!-- 2 column grid layout for inline styling -->
-                <!-- Checkbox -->
-                <div class="row mb-4">
-                    <!-- <div class="col d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <div class="row mb-4">
+                        <!-- <div class="col d-flex justify-content-center">
                         <div class="form-check">
                             <input
                                 class="form-check-input"
@@ -75,29 +94,28 @@
                         </div>
                     </div> -->
 
-                    <div class="col text-center">
-                        <!-- Simple link -->
-                        <a href="#!">Forgot password?</a>
+                        <div class="col text-center">
+                            <!-- Simple link -->
+                            <a href="#!">Forgot password?</a>
+                        </div>
+                        <!-- Submit button -->
+                        <div class="text-center mt-3">
+                            <button
+                                [disabled]="loginForm.invalid"
+                                type="submit"
+                                class="btn btn-primary btn-block mb-4"
+                            >
+                                Sign in
+                            </button>
+                        </div>
                     </div>
-                    <!-- Submit button -->
-                    <div class="text-center mt-3">
-                        <button
-                            [disabled]="loginForm.invalid"
-                            type="submit"
-                            class="btn btn-primary btn-block mb-4"
-                        >
-                            Sign in
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Register buttons -->
-                <div class="text-center">
-                    <p>
-                        Not a member?
-                        <a [routerLink]="['/auth/register']">Register</a>
-                    </p>
-                    <!-- <p>or sign up with:</p>
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                        <p>
+                            Not a member?
+                            <a [routerLink]="['/auth/register']">Register</a>
+                        </p>
+                        <!-- <p>or sign up with:</p>
                   <button type="button" class="btn btn-link btn-floating mx-1">
                     <i class="fab fa-facebook-f"></i>
                   </button>
@@ -113,8 +131,9 @@
                   <button type="button" class="btn btn-link btn-floating mx-1">
                     <i class="fab fa-github"></i>
                   </button> -->
-                </div>
-            </mat-card-content>
+                    </div>
+                </mat-card-content>
+            </form>
         </mat-card>
-    </form>
+    </div>
 </div>

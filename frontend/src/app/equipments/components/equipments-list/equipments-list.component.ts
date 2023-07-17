@@ -23,7 +23,7 @@ export class EquipmentsListComponent {
     count$: Observable<number>
     searchTerm: string = ''
     page = 0
-    pageSize = 3
+    pageSize = 5
 
     constructor(
         private dialogService: DialogService,

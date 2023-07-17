@@ -52,10 +52,7 @@ export const getCurrentEquipment = createSelector(
             }
             return equipment
         } else {
-            const foundEquipment = state.equipments.find(
-                (equip) => equip._id === currentEquipmentId
-            )
-            return foundEquipment
+            return state.equipment
         }
     }
 )

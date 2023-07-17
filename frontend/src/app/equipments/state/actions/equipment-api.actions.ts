@@ -5,6 +5,15 @@ export const loadEquipmentsSuccess = createAction(
     '[Equipment API] Load Success',
     props<{ equipments: Equipment[]; count: number }>()
 )
+export const loadEquipmentSuccess = createAction(
+    '[Equipment API] Load Current Equipment Success',
+    props<{ equipment: Equipment }>()
+)
+
+export const loadEquipmentFailure = createAction(
+    '[Equipment API] Load Current Equipment Fail',
+    props<{ error: string }>()
+)
 
 export const loadEquipmentsFailure = createAction(
     '[Equipment API] Load Fail',

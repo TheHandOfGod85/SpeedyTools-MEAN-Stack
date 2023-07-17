@@ -4,6 +4,7 @@ import { EquipmentApiActions, EquipmentPageActions } from './actions'
 
 export interface EquipmentState {
     currentEquipmentId: string | null
+    equipment: Equipment | null
     equipments: Equipment[]
     error: string
     isLoading: boolean
@@ -13,6 +14,7 @@ export interface EquipmentState {
 const initialState: EquipmentState = {
     currentEquipmentId: null,
     equipments: [],
+    equipment: null,
     error: '',
     isLoading: false,
     count: 0
@@ -46,6 +48,26 @@ export const equipmentReducer = createReducer<EquipmentState>(
                 equipments: [],
                 error: action.error,
                 isLoading: false
+            }
+        }
+    ),
+    on(
+        EquipmentApiActions.loadEquipmentSuccess,
+        (state, action): EquipmentState => {
+            return {
+                ...state,
+                equipment: action.equipment,
+                isLoading: false
+            }
+        }
+    ),
+    on(
+        EquipmentApiActions.loadEquipmentFailure,
+        (state, action): EquipmentState => {
+            return {
+                ...state,
+                equipment: null,
+                error: action.error
             }
         }
     ),
