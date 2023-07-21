@@ -1,196 +1,215 @@
+<app-loading *ngIf="isLoading$ | async"></app-loading>
 <div
-  class="d-flex flex-column align-items-center justify-content-center h-100"
-  *ngIf="isLoading$ | async"
+    class="d-flex flex-column justify-content-center align-items-center min-vh-100"
 >
-  <div class="spinner-border" role="status">
-    <span>Loading...</span>
-  </div>
-</div>
-<div class="container" *ngIf="equipment$ | async as equimpment">
-  <form
-    *ngIf="!(isLoading$ | async)"
-    [formGroup]="addEquipmentForm"
-    (ngSubmit)="saveEquipment(equimpment._id)"
-  >
-    <mat-card class="bg-light shadow-lg">
-      <div class="text-center fw-bold fs-4">
-        {{ title }}
-      </div>
-      <mat-card-content>
-        <!--name-->
-        <div class="row justify-content-center">
-          <div class="col-xs-12 col-md-8 has-validation">
-            <label for="name" class="form-label">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              placeholder="Name"
-              formControlName="name"
-            />
-            <p
-              *ngIf="
-                !addEquipmentForm.get('name').valid &&
-                addEquipmentForm.get('name').touched
-              "
-              class="alert alert-warning fs-6"
-            >
-              <span *ngIf="addEquipmentForm.get('name').errors['required']"
-                >Please enter a name
-              </span>
-            </p>
-          </div>
-        </div>
-        <!--description-->
-        <div class="row justify-content-center">
-          <div class="col-xs-12 col-md-8">
-            <label for="description" class="form-label">Description</label>
-            <textarea
-              class="form-control"
-              id="description"
-              rows="3"
-              placeholder="Type a description"
-              formControlName="description"
-            ></textarea>
-          </div>
-        </div>
-        <!--quantity-->
-        <div class="row justify-content-center">
-          <div class="col-xs-12 col-md-3">
-            <label for="quantity" class="form-label">Quantity</label>
-            <input
-              type="number"
-              min="0"
-              class="form-control"
-              id="quantity"
-              placeholder="Quantity"
-              formControlName="quantity"
-            />
-          </div>
-          <!--serialNumber-->
-          <div class="col-xs-12 col-md-5">
-            <label for="serialNumber" class="form-label">Serial Number</label>
-            <input
-              type="text"
-              class="form-control"
-              id="serialNumber"
-              placeholder="Serial Number"
-              formControlName="serialNumber"
-            />
-            <p
-              *ngIf="
-                !addEquipmentForm.get('serialNumber').valid &&
-                addEquipmentForm.get('serialNumber').touched
-              "
-              class="alert alert-warning fs-6"
-            >
-              Please enter serial number
-            </p>
-          </div>
-        </div>
-        <!--power-->
-        <div class="row justify-content-center">
-          <div class="col-xs-12 col-md-3">
-            <label for="powerRequirement" class="form-label"
-              >Power Requirement</label
-            >
-            <input
-              type="number"
-              min="0"
-              class="form-control"
-              id="powerRequirement"
-              placeholder="Power"
-              formControlName="powerRequirement"
-            />
-            <p
-              *ngIf="
-                !addEquipmentForm.get('powerRequirement').valid &&
-                addEquipmentForm.get('powerRequirement').touched
-              "
-              class="alert alert-warning fs-6"
-            >
-              Please enter the power requirement
-            </p>
-          </div>
-          <!--manufacturer-->
-          <div class="col-xs-12 col-md-5">
-            <label for="manufacturer" class="form-label">Manufacturer</label>
-            <input
-              type="text"
-              class="form-control"
-              id="manufacturer"
-              placeholder="Manufacturer"
-              formControlName="manufacturer"
-            />
-            <p
-              *ngIf="
-                !addEquipmentForm.get('manufacturer').valid &&
-                addEquipmentForm.get('manufacturer').touched
-              "
-              class="alert alert-warning fs-6"
-            >
-              Please enter a manufacturer
-            </p>
-          </div>
-        </div>
-        <!--installationDate-->
-        <div class="row justify-content-center mt-3">
-          <mat-form-field class="col-xs-12 col-md-8">
-            <mat-label>Choose a date</mat-label>
-            <input
-              matInput
-              [matDatepicker]="installationDate"
-              formControlName="installationDate"
-            />
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="installationDate"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #installationDate></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <!--location-->
-        <div class="row justify-content-center">
-          <div class="col-xs-12 col-md-8">
-            <label for="location" class="form-label">Location</label>
-            <input
-              type="text"
-              class="form-control"
-              id="location"
-              placeholder="Location"
-              formControlName="location"
-            />
-            <p
-              *ngIf="
-                !addEquipmentForm.get('location').valid &&
-                addEquipmentForm.get('location').touched
-              "
-              class="alert alert-warning fs-6"
-            >
-              Please enter a location
-            </p>
-            <p *ngIf="error$ | async as error" class="alert alert-warning">
-              {{ error }}
-            </p>
-            <div class="text-end mt-5">
-              <button
-                class="btn btn-secondary"
-                type="submit"
-                [disabled]="!addEquipmentForm.valid"
-              >
-                Submit
-              </button>
-              <a
-                class="btn btn-dark ms-1"
-                type="button"
-                [routerLink]="['/equipments']"
-                >Cancel</a
-              >
-            </div>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </form>
+    <div class="container" *ngIf="equipment$ | async as equimpment">
+        <form
+            *ngIf="!(isLoading$ | async)"
+            [formGroup]="addEquipmentForm"
+            (ngSubmit)="saveEquipment(equimpment._id)"
+        >
+            <mat-card class="bg-light shadow-lg">
+                <div class="text-center fw-bold fs-4">
+                    {{ title }}
+                </div>
+                <mat-card-content>
+                    <!--name-->
+                    <div class="row justify-content-center">
+                        <div class="col-xs-12 col-md-8 has-validation">
+                            <label for="name" class="form-label">Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                placeholder="Name"
+                                formControlName="name"
+                            />
+                            <p
+                                *ngIf="
+                                    !addEquipmentForm.get('name').valid &&
+                                    addEquipmentForm.get('name').touched
+                                "
+                                class="alert alert-warning fs-6"
+                            >
+                                <span
+                                    *ngIf="
+                                        addEquipmentForm.get('name').errors[
+                                            'required'
+                                        ]
+                                    "
+                                    >Please enter a name
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <!--description-->
+                    <div class="row justify-content-center">
+                        <div class="col-xs-12 col-md-8">
+                            <label for="description" class="form-label"
+                                >Description</label
+                            >
+                            <textarea
+                                class="form-control"
+                                id="description"
+                                rows="3"
+                                placeholder="Type a description"
+                                formControlName="description"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <!--quantity-->
+                    <div class="row justify-content-center">
+                        <div class="col-xs-12 col-md-3">
+                            <label for="quantity" class="form-label"
+                                >Quantity</label
+                            >
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                id="quantity"
+                                placeholder="Quantity"
+                                formControlName="quantity"
+                            />
+                        </div>
+                        <!--serialNumber-->
+                        <div class="col-xs-12 col-md-5">
+                            <label for="serialNumber" class="form-label"
+                                >Serial Number</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="serialNumber"
+                                placeholder="Serial Number"
+                                formControlName="serialNumber"
+                            />
+                            <p
+                                *ngIf="
+                                    !addEquipmentForm.get('serialNumber')
+                                        .valid &&
+                                    addEquipmentForm.get('serialNumber').touched
+                                "
+                                class="alert alert-warning fs-6"
+                            >
+                                Please enter serial number
+                            </p>
+                        </div>
+                    </div>
+                    <!--power-->
+                    <div class="row justify-content-center">
+                        <div class="col-xs-12 col-md-3">
+                            <label for="powerRequirement" class="form-label"
+                                >Power Requirement</label
+                            >
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                id="powerRequirement"
+                                placeholder="Power"
+                                formControlName="powerRequirement"
+                            />
+                            <p
+                                *ngIf="
+                                    !addEquipmentForm.get('powerRequirement')
+                                        .valid &&
+                                    addEquipmentForm.get('powerRequirement')
+                                        .touched
+                                "
+                                class="alert alert-warning fs-6"
+                            >
+                                Please enter the power requirement
+                            </p>
+                        </div>
+                        <!--manufacturer-->
+                        <div class="col-xs-12 col-md-5">
+                            <label for="manufacturer" class="form-label"
+                                >Manufacturer</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="manufacturer"
+                                placeholder="Manufacturer"
+                                formControlName="manufacturer"
+                            />
+                            <p
+                                *ngIf="
+                                    !addEquipmentForm.get('manufacturer')
+                                        .valid &&
+                                    addEquipmentForm.get('manufacturer').touched
+                                "
+                                class="alert alert-warning fs-6"
+                            >
+                                Please enter a manufacturer
+                            </p>
+                        </div>
+                    </div>
+                    <!--installationDate-->
+                    <div class="row justify-content-center mt-3">
+                        <mat-form-field class="col-xs-12 col-md-8">
+                            <mat-label>Choose a date</mat-label>
+                            <input
+                                matInput
+                                [matDatepicker]="installationDate"
+                                formControlName="installationDate"
+                            />
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle
+                                matIconSuffix
+                                [for]="installationDate"
+                            ></mat-datepicker-toggle>
+                            <mat-datepicker #installationDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <!--location-->
+                    <div class="row justify-content-center">
+                        <div class="col-xs-12 col-md-8">
+                            <label for="location" class="form-label"
+                                >Location</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="location"
+                                placeholder="Location"
+                                formControlName="location"
+                            />
+                            <p
+                                *ngIf="
+                                    !addEquipmentForm.get('location').valid &&
+                                    addEquipmentForm.get('location').touched
+                                "
+                                class="alert alert-warning fs-6"
+                            >
+                                Please enter a location
+                            </p>
+                            <p
+                                *ngIf="error$ | async as error"
+                                class="alert alert-warning"
+                            >
+                                {{ error }}
+                            </p>
+                            <div class="text-end mt-5">
+                                <button
+                                    class="btn btn-secondary"
+                                    type="submit"
+                                    [disabled]="!addEquipmentForm.valid"
+                                >
+                                    Submit
+                                </button>
+                                <a
+                                    class="btn btn-dark ms-1"
+                                    type="button"
+                                    [routerLink]="['/equipments']"
+                                    >Cancel</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </form>
+    </div>
 </div>

@@ -16,8 +16,9 @@ import { sharedReducer } from './state/shared.reducer'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { FormsModule } from '@angular/forms'
 import { NgxPaginationModule } from 'ngx-pagination'
+import { LoadingComponent } from './components/loading/loading.component'
 @NgModule({
-    declarations: [ConfirmationComponent],
+    declarations: [ConfirmationComponent, LoadingComponent],
     imports: [
         CommonModule,
         MatDialogModule,
@@ -50,7 +51,8 @@ import { NgxPaginationModule } from 'ngx-pagination'
         ReactiveFormsModule,
         MatPaginatorModule,
         FormsModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        LoadingComponent
     ]
 })
 export class SharedModule {}
