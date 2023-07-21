@@ -66,13 +66,6 @@
                         >Logout</a
                     >
                 </li>
-                <!-- <li
-                    class="nav-item"
-                    *ngIf="(isLoggedIn$ | async) && (user$ | async) as user"
-                >
-                    <h1>Welcome {{ user.name }}</h1>
-                    <h1>Role : {{ user.role }}</h1>
-                </li> -->
 
                 <li
                     *ngIf="(isLoggedIn$ | async) && (user$ | async) as user"
@@ -87,7 +80,14 @@
                         <i class="bi bi-person"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                type="button"
+                                href="#"
+                                >Profile</a
+                            >
+                        </li>
                     </ul>
                 </li>
             </ul>
