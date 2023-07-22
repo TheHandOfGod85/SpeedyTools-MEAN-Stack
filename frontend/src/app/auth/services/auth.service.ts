@@ -102,6 +102,10 @@ export class AuthService {
         return false
     }
 
+    forgotPassword(email: string) {
+        return this.http.post(this.authUrl + 'forgotPassword', { email })
+    }
+
     private getUserFromLocalStorage(): any {
         const user = localStorage.getItem(this.USER)
         if (user) {
