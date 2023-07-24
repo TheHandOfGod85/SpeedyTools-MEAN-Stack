@@ -11,7 +11,7 @@ import { User } from '../models/user.model'
     providedIn: 'root'
 })
 export class AuthService {
-    private authUrl = 'http://localhost:3000/api/users/'
+    private authUrl = 'http://127.0.0.1:3000/api/users/'
     private readonly TOKEN_NAME = 'token'
     private readonly USER = 'user'
 
@@ -104,6 +104,13 @@ export class AuthService {
 
     forgotPassword(email: string) {
         return this.http.post(this.authUrl + 'forgotPassword', { email })
+    }
+
+    resetPassword(password: string, passwordConfirm: string, token: string) {
+        return this.http.patch(this.authUrl + 'resetPassword/' + token, {
+            password,
+            passwordConfirm
+        })
     }
 
     private getUserFromLocalStorage(): any {

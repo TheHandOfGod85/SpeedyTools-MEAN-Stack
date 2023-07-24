@@ -125,9 +125,29 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     const resetToken = user.createPasswordResetToken()
     await user.save({ validateBeforeSave: false })
     //3)Send it to user`s email
-    const resetURL = `${req.protocol}://${req.get(
-        'host'
-    )}/api/users/resetPassword/${resetToken}`
+    if (process.env.NODE_ENV === 'production') {
+        const resetURL = `${req.protocol}://${req.get(
+            'host'
+        )}/auth/reset-password/${resetToken}`
+        const message = `Forgot your password? Submit the form with your new password to: ${resetURL}.
+        \nIf you did not forget your password, please ignore this email!`
+        try {
+            await sendMail({
+                email: user.email,
+                subject: 'Your password reset token (valid for 10 mins)',
+                message
+            })
+        } catch (error) {
+            user.passwordResetToken = undefined
+            user.passwordResetExpires = undefined
+            await user.save({ validateBeforeSave: false })
+
+            return next(
+                new AppError('There was an error sending the email. Try again later', 500)
+            )
+        }
+    }
+    const resetURL = `${req.protocol}://4200/auth/reset-password/${resetToken}`
     const message = `Forgot your password? Submit the form with your new password to: ${resetURL}.
     \nIf you did not forget your password, please ignore this email!`
     try {
